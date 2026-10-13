@@ -1,0 +1,12 @@
+{
+  "version": "1.0.1-offline",
+  "archive": "dictionary-data.zip",
+  "archive_sha256": "39a8975a94bad7639f8e8ff0ab9f96bdfa3e4b66875b6470b4cd789e2205cab4",
+  "archive_bytes": 837409906,
+  "dictionary_sha256": "ba41a37dce4ca149a36d305e315deae4ac96c5ad3faa002731773f2503215a0b",
+  "entries": 53412,
+  "audio_entries": 25911,
+  "audio_files": 25903,
+  "missing_source_audio": 350,
+  "source": "http://hkuri.cneas.tohoku.ac.jp/p01/mongol/list?groupId=12"
+}

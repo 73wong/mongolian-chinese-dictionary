@@ -1,0 +1,15 @@
+{
+  "source": "http://hkuri.cneas.tohoku.ac.jp/guide/p01/",
+  "sections": [
+    {
+      "title_zh": "转写模糊查询",
+      "title_en": "Fuzzy transliteration",
+      "zh": "默认开启，可在搜索条件中关闭；开关选择会保存。仅转写字母参与混查：o/u、O/U、t/d、k/g。a 和 e 始终区分，不参与混查。大小写由“不分大小写”独立控制。",
+      "en": "Enabled by default; your choice in search filters is saved. Only transliteration uses these equivalences: o/u, O/U, t/d and k/g. The letters a and e remain distinct at every position. Ignore case is a separate option."
+    }
+  ],
+  "note_zh": "蒙古文字、罗马字转写与键盘按键的对应关系。点击图片可放大。",
+  "note_en": "Correspondence between Mongolian letters, Roman transliteration and keyboard keys. Tap the chart to zoom.",
+  "fuzzy_zh": "这张表说明原网站的输入方式。本 App 的转写搜索不会自动转换为蒙古文；请按词条转写输入，或用蒙古文输入法输入原文。",
+  "fuzzy_en": "This chart describes input on the source website. This app does not convert transliteration into Mongolian automatically. Search using the entry’s transliteration or type Mongolian with a Mongolian keyboard."
+}

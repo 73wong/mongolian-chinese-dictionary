@@ -1,0 +1,8 @@
+{
+  "keywords": ["nom", "mori", "usu"],
+  "max_entries": 450,
+  "request_delay_seconds": 1.5,
+  "refresh_pages": false,
+  "serial": "",
+  "install_to_device": true
+}

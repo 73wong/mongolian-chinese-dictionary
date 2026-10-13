@@ -1,0 +1,6 @@
+Mongolian Universal White, Version 1.00
+(C) Copyright Almas Inc. & Delehi Co. Ltd. 2011-2014
+Font name-table license entry: GPL 2.0
+Source: http://hkuri.cneas.tohoku.ac.jp/p01/resources/css/fontface/woff/MongolianUniversalWhite.woff
+Retrieved 2026-10-07. WOFF decompressed to SFNT/TTF using fontTools; glyphs and shaping tables unchanged.
+Included for the user's local dictionary prototype. Before external distribution, review the full applicable license and source-delivery requirements.

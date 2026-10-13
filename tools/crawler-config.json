@@ -1,0 +1,7 @@
+{
+  "pages_per_run": 10,
+  "request_delay_seconds": 1.5,
+  "serial": "",
+  "continuous": true,
+  "audio_batch_size": 50
+}

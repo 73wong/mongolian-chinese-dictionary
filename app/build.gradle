@@ -1,0 +1,29 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'org.example.mongoldictionary'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'org.example.mongoldictionary'
+        testInstrumentationRunner "org.example.mongoldictionary.RenderingChecks"
+        minSdk 26
+        targetSdk 34
+        versionCode 14
+        versionName '1.0.1-offline'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+// A clean source checkout must restore the matching offline Release asset first.
+tasks.register('verifyOfflineData') {
+    doLast {
+        def dictionary = file('src/main/assets/dictionary.json')
+        def audio = file('src/main/assets/audio')
+        if (!dictionary.isFile() || !audio.isDirectory()) {
+            throw new GradleException('Offline data missing. Run: python3 tools/restore_data.py /path/to/dictionary-data.zip')
+        }
+    }
+}
+tasks.named('preBuild').configure { dependsOn('verifyOfflineData') }
