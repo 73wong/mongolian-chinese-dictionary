@@ -136,7 +136,7 @@ adb shell am instrument -w -e offlineOnly true org.example.mongoldictionary.test
 
 本应用的词条、释义及已有语音主要采集自以下网站，并经过整理，用于离线查询和学习：
 
-**[蒙汉词典原网站](http://hkuri.cneas.tohoku.ac.jp/p01/mongol/list?groupId=12)**
+**[数据采集页面](http://hkuri.cneas.tohoku.ac.jp/p01/mongol/list?groupId=12)**
 
 网站域名：`hkuri.cneas.tohoku.ac.jp`
 
@@ -156,10 +156,17 @@ adb shell am instrument -w -e offlineOnly true org.example.mongoldictionary.test
 
 字体等第三方组件的现有许可与说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及对应资源目录中的许可文件。
 
+## 1.0.2 更新内容
+
+- 设置页的数据来源改为实际抓取页面链接。
+- 来源链接支持点击打开浏览器、长按复制。
+- 删除设置页底部多余的说明文字，中英文界面同步调整。
+- 词库与语音数据未变，可继续使用上一版的 `dictionary-data.zip`。
+
 ## 版本与签名
 
-当前版本：**`1.0.1-offline`**  
-Android versionCode：**`14`**
+当前版本：**`1.0.2-offline`**  
+Android versionCode：**`15`**
 
 当前 APK 使用调试签名。长期发布前应配置并妥善保存正式签名密钥，后续覆盖升级需保持签名一致。
 
@@ -190,6 +197,12 @@ IPA and Cyrillic Mongolian are included where available in the source data.
 Download `mongolian-chinese-dictionary.apk` from [Releases](https://github.com/73wong/mongolian-chinese-dictionary/releases).
 
 The APK includes the dictionary and available audio. Regular users do not need the separate data archive or crawler tools.
+
+### Version 1.0.2
+
+The Settings page now links directly to the data collection page. Tap the link to open it in a browser or long-press to copy it. The redundant footer text has been removed in both interface languages.
+
+The dictionary and audio data are unchanged; the previous `dictionary-data.zip` remains compatible.
 
 ### Sources and acknowledgements
 
