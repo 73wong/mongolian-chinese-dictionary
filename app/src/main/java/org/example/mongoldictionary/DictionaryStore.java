@@ -19,7 +19,21 @@ public final class DictionaryStore {
         ByteArrayOutputStream out=new ByteArrayOutputStream(); byte[] b=new byte[8192]; int n;
         while((n=in.read(b))!=-1) { if(out.size()+n>limit) throw new IOException("文件过大");out.write(b,0,n); } return out.toByteArray();
     }
+    private static String cachedKey;
+    private static List<JSONObject> cachedRows;
     public List<JSONObject> load() throws Exception {
+        synchronized(DictionaryStore.class){
+            File file=database.getBaseFile();
+            String key=file.getAbsolutePath()+":"+file.lastModified()+":"+file.length();
+            if(key.equals(cachedKey)&&cachedRows!=null)return new ArrayList<>(cachedRows);
+            long start=android.os.SystemClock.elapsedRealtime();
+            List<JSONObject> rows=loadUncached();
+            cachedKey=key;cachedRows=rows;
+            android.util.Log.i("DictionaryPerf","load_ms="+(android.os.SystemClock.elapsedRealtime()-start));
+            return new ArrayList<>(rows);
+        }
+    }
+    private List<JSONObject> loadUncached() throws Exception {
         InputStream source;
         try { source=database.openRead(); } catch(FileNotFoundException e) { source=context.getAssets().open("dictionary.json"); }
         try(android.util.JsonReader reader=new android.util.JsonReader(new InputStreamReader(source,StandardCharsets.UTF_8))) {
@@ -27,7 +41,20 @@ public final class DictionaryStore {
             while(reader.hasNext())rows.add((JSONObject)readValue(reader));
             reader.endArray();
             if(reader.peek()!=android.util.JsonToken.END_DOCUMENT)throw new IOException("Trailing dictionary data");
+            applyPronunciationCorrections(rows);
+            ReferenceDefinitions.apply(context,rows);
             return rows;
+        }
+    }
+    private void applyPronunciationCorrections(List<JSONObject> rows)throws Exception {
+        JSONArray corrections;
+        try(InputStream in=context.getAssets().open("pronunciation-corrections.json")) {
+            corrections=new JSONArray(new String(read(in,100000),StandardCharsets.UTF_8));
+        }
+        Map<String,JSONObject> byId=new HashMap<>();
+        for(int i=0;i<corrections.length();i++){JSONObject c=corrections.getJSONObject(i);byId.put(c.getString("id"),c);}
+        for(JSONObject row:rows){JSONObject c=byId.get(row.optString("id"));
+            if(c!=null&&c.getString("transliteration").equals(row.optString("transliteration"))&&c.getString("from").equals(row.optString("pronunciation")))row.put("pronunciation",c.getString("to"));
         }
     }
     private static Object readValue(android.util.JsonReader reader)throws Exception {
@@ -138,6 +165,7 @@ public final class DictionaryStore {
             writer.write('[');boolean first=true;
             for(JSONObject row:plan.rows){if(!first)writer.write(',');writer.write(row.toString());first=false;}
             writer.write(']');writer.flush();database.finishWrite(out);
+            synchronized(DictionaryStore.class){cachedKey=null;cachedRows=null;}
         }
         catch(Exception e){if(out!=null)database.failWrite(out);throw e;}
     }

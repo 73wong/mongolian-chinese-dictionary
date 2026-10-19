@@ -35,12 +35,18 @@ public class MainActivity extends Activity {
     private void hideKeyboard(){if(root==null)return;((android.view.inputmethod.InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(root.getWindowToken(),0);}
     private void navigation(){LinearLayout bar=new LinearLayout(this);root.addView(bar);String[] names={UiText.get(MainActivity.this,"词典"),UiText.get(MainActivity.this,"学习"),UiText.get(MainActivity.this,"设置")};for(int i=0;i<3;i++){final int tab=i;Button b=new Button(this);b.setText(names[i]);b.setAllCaps(false);b.setBackgroundColor(Color.TRANSPARENT);b.setTextColor(Color.rgb(25,57,53));bar.addView(b,new LinearLayout.LayoutParams(0,dp(52),1));b.setOnClickListener(v->{if(tab==0){searching=false;home();}else if(tab==1)startActivity(new android.content.Intent(this,StudyActivity.class));else settingsPage();});}}
 
+    private final android.os.Handler searchHandler=new android.os.Handler(android.os.Looper.getMainLooper());
+    private final java.util.concurrent.ExecutorService searchWorker=java.util.concurrent.Executors.newSingleThreadExecutor();
+    private volatile int searchGeneration;
+    private int audioCount=-1;
+    private WordAudioView wordAudio;
     private int dp(int n) { return (int)(n * getResources().getDisplayMetrics().density); }
-    private String field(JSONObject e, String name) { return e.optString(name, ""); }
+    private String field(JSONObject e, String name) { return name.equals("definition")?ReferenceDefinitions.text(e):e.optString(name, ""); }
     private String key(JSONObject e) { return field(e,"id"); }
     private String legacyKey(JSONObject e) {
-        return field(e,"mongolian") + "\u0001" + field(e,"transliteration") + "\u0001" + field(e,"source_page") + "\u0001" + field(e,"definition");
+        return field(e,"mongolian") + "\u0001" + field(e,"transliteration") + "\u0001" + field(e,"source_page") + "\u0001" + e.optString("definition");
     }
+    @Override protected void onNewIntent(android.content.Intent intent){super.onNewIntent(intent);setIntent(intent);if("settings".equals(intent.getStringExtra("destination")))settingsPage();else{searching=false;home();}}
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         prefs = getSharedPreferences("favorites", MODE_PRIVATE);
@@ -50,8 +56,14 @@ public class MainActivity extends Activity {
         scope=options.getInt("scope",0);matchMode=options.getInt("match",0);ignoreCase=options.getBoolean("ignoreCase",false);fuzzy=options.getBoolean("fuzzyTransliteration",true);
         if(state!=null){searching=state.getBoolean("searching");settingsOpen=state.getBoolean("settingsOpen");resultPosition=state.getInt("resultPosition");resultTop=state.getInt("resultTop");}
         store=new DictionaryStore(this);
-        try {
-            entries.addAll(store.load());
+        shell();label(UiText.get(this,"蒙汉词典"),28);root.addView(new ProgressBar(this));
+        new Thread(()->{
+          try {
+            List<JSONObject> loaded=store.load();
+            runOnUiThread(()->{
+              if(isFinishing()||isDestroyed())return;
+              try {
+            entries.addAll(loaded);
             try (InputStream migration=getAssets().open("favorite-migrations.json")) {
                 ByteArrayOutputStream migratedBytes=new ByteArrayOutputStream();
                 byte[] buf=new byte[4096]; int length;
@@ -65,12 +77,16 @@ public class MainActivity extends Activity {
             }
             for(JSONObject entry:entries) if(favorites.remove(legacyKey(entry))) favorites.add(key(entry));
             prefs.edit().putStringSet("entries",new HashSet<>(favorites)).apply();
-            if(settingsOpen)settingsPage();else home();
-        } catch(Exception e) {
-            shell(); label(UiText.get(MainActivity.this,"词库未能加载。请保留应用数据，检查存储空间后重试。"),20);
-        }
+            if(settingsOpen||"settings".equals(getIntent().getStringExtra("destination")))settingsPage();else home();
+              }catch(Exception e){loadError();}
+            });
+          }catch(Exception e){runOnUiThread(()->loadError());}
+        },"dictionary-loader").start();
     }
+    private void loadError(){if(isFinishing()||isDestroyed())return;shell();label(UiText.get(this,"词库未能加载。请保留应用数据，检查存储空间后重试。"),20);}
+
     private void shell() {
+        searchGeneration++;searchHandler.removeCallbacksAndMessages(null);
         root=new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(dp(18),dp(18),dp(18),dp(8)); root.setBackgroundColor(Color.rgb(248,247,242));
         setContentView(root);
@@ -124,20 +140,54 @@ public class MainActivity extends Activity {
     private void refresh(){
         visible.clear();List<String> labels=new ArrayList<>();
         filterButton.setText(scopes()[scope]+" · "+modes()[matchMode]+(fuzzy?UiText.get(this," · 转写模糊"):"")+(ignoreCase?UiText.get(MainActivity.this," · 不分大小写"):"")+(onlyFavorites?UiText.get(MainActivity.this," · 只看收藏"):""));
-        for(JSONObject e:entries)if((!onlyFavorites||favorites.contains(key(e)))&&SearchRules.matches(e,query,scope,matchMode,ignoreCase,fuzzy)){
-            visible.add(e);labels.add((favorites.contains(key(e))?"★ ":"")+field(e,"transliteration")+"\n"+field(e,"mongolian")+"\n"+field(e,"definition"));
-        }
-        count.setText(query.trim().isEmpty()?UiText.get(MainActivity.this,"输入关键词开始搜索"):visible.isEmpty()?UiText.get(MainActivity.this,"没有匹配词条。"):visible.size()+UiText.get(MainActivity.this," 条结果"));
+        final int generation=++searchGeneration;
+        searchHandler.removeCallbacksAndMessages(null);
+        final String requested=query;final int selectedScope=scope,selectedMode=matchMode;
+        final boolean folded=ignoreCase,ambiguous=fuzzy,starsOnly=onlyFavorites;
+        final Set<String> stars=new HashSet<>(favorites);
+        final List<JSONObject> snapshot=new ArrayList<>(entries);
+        list.setAdapter(null);
+        count.setText(requested.trim().isEmpty()?UiText.get(this,"输入关键词开始搜索"):"…");
+        if(requested.trim().isEmpty())return;
+        searchHandler.postDelayed(()->searchWorker.execute(()->{
+            long started=android.os.SystemClock.elapsedRealtime();
+            List<JSONObject> matches=new ArrayList<>();
+            for(JSONObject e:snapshot){
+                if(generation!=searchGeneration||Thread.currentThread().isInterrupted())return;
+                if((!starsOnly||stars.contains(key(e)))&&SearchRules.matches(e,requested,selectedScope,selectedMode,folded,ambiguous)){
+                    matches.add(e);labels.add((stars.contains(key(e))?"★ ":"")+field(e,"transliteration")+"\n"+field(e,"mongolian")+"\n"+field(e,"definition"));
+                }
+            }
+            android.util.Log.i("DictionaryPerf","search_ms="+(android.os.SystemClock.elapsedRealtime()-started));
+            runOnUiThread(()->{
+                if(generation!=searchGeneration||isFinishing()||isDestroyed())return;
+                visible.clear();visible.addAll(matches);
+        count.setText(requested.trim().isEmpty()?UiText.get(MainActivity.this,"输入关键词开始搜索"):visible.isEmpty()?UiText.get(MainActivity.this,"没有匹配词条。"):visible.size()+UiText.get(MainActivity.this," 条结果"));
         list.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,labels){@Override public View getView(int p,View recycled,android.view.ViewGroup parent){TextView t=(TextView)super.getView(p,recycled,parent);t.setTextSize(17);t.setText(DictionaryFont.apply(MainActivity.this,labels.get(p)));t.setMaxLines(4);t.setEllipsize(android.text.TextUtils.TruncateAt.END);t.setPadding(dp(4),dp(14),dp(4),dp(14));return t;}});
+                list.setSelectionFromTop(resultPosition,resultTop);
+            });
+        }),200);
     }
+
     private void settingsPage(){
         stopAudio();details=false;settingsOpen=true;hideKeyboard();shell();label(UiText.get(MainActivity.this,"设置"),28);
         ScrollView scroll=new ScrollView(this);LinearLayout content=new LinearLayout(this);content.setOrientation(1);scroll.addView(content);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));LinearLayout container=root;root=content;
         label(UiText.get(MainActivity.this,"偏好"),16);action(UiText.get(MainActivity.this,"界面语言"),()->languagePicker());action(UiText.get(MainActivity.this,"学习设置"),()->learningSettings());
         action(UiText.get(this,"输入与转写指南"),()->openInputGuide());
         label(UiText.get(MainActivity.this,"数据管理"),16);action(UiText.get(MainActivity.this,"导入 / 导出与备份"),()->packages());
-        label(UiText.get(MainActivity.this,"词库信息"),16);label(UiText.get(MainActivity.this,"词条数量：")+entries.size(),18);int audio=0;for(JSONObject e:entries){if(store.hasAudio(e))audio++;}label(UiText.get(MainActivity.this,"本地语音：")+audio,18);
-        label(UiText.get(MainActivity.this,"数据来源：东北大学蒙汉词典"),14);label(UiText.get(MainActivity.this,"离线查询 · 原文与界面语言分别保存"),14);
+        label(UiText.get(MainActivity.this,"词库信息"),16);label(UiText.get(MainActivity.this,"词条数量：")+entries.size(),18);TextView audioLabel=label(UiText.get(this,"本地语音：")+(audioCount<0?"…":audioCount),18);
+        if(audioCount<0){List<JSONObject> snapshot=new ArrayList<>(entries);new Thread(()->{int n=0;for(JSONObject e:snapshot)if(store.hasAudio(e))n++;final int total=n;runOnUiThread(()->{if(isFinishing()||isDestroyed())return;audioCount=total;audioLabel.setText(UiText.get(this,"本地语音：")+total);});},"audio-count").start();}
+        label(UiText.get(this,"数据来源"),14);
+        final String sourceUrl="http://hkuri.cneas.tohoku.ac.jp/p01/mongol/list?groupId=12";
+        TextView sourceLink=label(sourceUrl,14);
+        sourceLink.setTextIsSelectable(false);
+        sourceLink.setTextColor(Color.rgb(24,100,122));
+        sourceLink.setPaintFlags(sourceLink.getPaintFlags()|android.graphics.Paint.UNDERLINE_TEXT_FLAG);
+        sourceLink.setOnClickListener(v->{
+            try { startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW,android.net.Uri.parse(sourceUrl))); }
+            catch(android.content.ActivityNotFoundException e){ TextCopy.copy(this,sourceUrl); }
+        });
+        sourceLink.setOnLongClickListener(v->{TextCopy.copy(this,sourceUrl);return true;});
         root=container;navigation();
     }
     private void languagePicker(){String[] names={"跟随系统 / System","简体中文","English"};String selected=getSharedPreferences("ui",MODE_PRIVATE).getString("language","zh");int index=selected.equals("zh")?1:selected.equals("en")?2:0;
@@ -162,7 +212,7 @@ public class MainActivity extends Activity {
         root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));scroll.addView(content);
         LinearLayout original=root;root=content;
         label(UiText.get(MainActivity.this,"转写字母：")+field(e,"transliteration"),27);
-        vertical(field(e,"mongolian"),34,260);
+        wordAudio=new WordAudioView(this,field(e,"mongolian"),34,160,store.audio(e),null);root.addView(wordAudio);
         label(UiText.get(MainActivity.this,"国际音标：")+(field(e,"pronunciation").isEmpty()?UiText.get(MainActivity.this,"本条采集记录暂无"):field(e,"pronunciation")),18);
         label(UiText.get(MainActivity.this,"西里尔蒙古文：")+(field(e,"pronunciation_extra").isEmpty()?UiText.get(MainActivity.this,"本条采集记录暂无"):field(e,"pronunciation_extra")),18);
         Button star=new Button(this);root.addView(star);setStar(star,e);
@@ -176,14 +226,8 @@ public class MainActivity extends Activity {
                     .setMessage(UiText.get(MainActivity.this,"本组共 ")+group.size()+UiText.get(MainActivity.this," 条，将新增 ")+countAdded+UiText.get(MainActivity.this," 条。已加入的词保留进度；每日按新词上限逐步学习。"))
                     .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"加入整组"),(d,w)->{try{study.add(group);learn.setText(UiText.get(MainActivity.this,"已加入学习 · 查看任务"));Toast.makeText(this,UiText.get(MainActivity.this,"已加入整组"),Toast.LENGTH_SHORT).show();}catch(Exception error){Toast.makeText(this,error.getMessage(),Toast.LENGTH_LONG).show();}}).show();}else startActivity(new android.content.Intent(this,StudyActivity.class));}
             catch(Exception error){Toast.makeText(this,UiText.get(MainActivity.this,"学习记录未能保存：")+error.getMessage(),Toast.LENGTH_LONG).show();}});
-        File audio=store.audio(e);
-        if(audio!=null&&audio.isFile()) {
-            Button play=new Button(this);play.setText(UiText.get(MainActivity.this,"▶ 播放词条语音"));root.addView(play);
-            play.setOnClickListener(v->playAudio(audio,play));
-            if(!field(e,"audio_source").isEmpty())label(UiText.get(MainActivity.this,"语音来源：")+field(e,"audio_source"),14);
-        } else label(UiText.get(MainActivity.this,"语音待补 · 可通过导入包添加"),14);
-        label(UiText.get(MainActivity.this,"词条 ID：")+key(e),12);
         label(UiText.get(MainActivity.this,"释义与例句 · 向左滑动查看更多"),17);
+        if(e.has("definition_reference"))label((UiText.language(this).equals("en")?"Definition from: ":"释义参见：")+e.optString("definition_reference"),14);
         vertical(field(e,"definition"),22,360);
         if(e.optJSONArray("references")!=null && e.optJSONArray("references").length()>0)label(UiText.get(MainActivity.this,"此条含参见词条；目标可能不在本次样本中。"),14);
         label(UiText.get(MainActivity.this,"来源页／段：")+(field(e,"source_page").isEmpty()?UiText.get(MainActivity.this,"未填写"):field(e,"source_page")),14);
@@ -231,7 +275,7 @@ public class MainActivity extends Activity {
             try(InputStream in=getContentResolver().openInputStream(uri)){if(in==null)throw new IOException(UiText.get(MainActivity.this,"无法读取文件"));plan=store.preview(in,entries);}
             return ()->new android.app.AlertDialog.Builder(this).setTitle(UiText.get(MainActivity.this,"确认导入变更")).setMessage(plan.summary())
               .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"导入"),(dialog,which)->background(UiText.get(MainActivity.this,"正在保存…"),()->{
-                  store.commit(plan);return ()->{entries.clear();entries.addAll(plan.rows);home();Toast.makeText(this,UiText.get(MainActivity.this,"导入完成"),Toast.LENGTH_LONG).show();};
+                  store.commit(plan);ReferenceDefinitions.apply(this,plan.rows);return ()->{audioCount=-1;entries.clear();entries.addAll(plan.rows);home();Toast.makeText(this,UiText.get(MainActivity.this,"导入完成"),Toast.LENGTH_LONG).show();};
               })).show();
         });
     }
@@ -243,7 +287,8 @@ public class MainActivity extends Activity {
         try {player.setDataSource(file.getAbsolutePath());player.prepareAsync();}
         catch(Exception error){button.setEnabled(true);stopAudio();Toast.makeText(this,UiText.get(MainActivity.this,"无法读取语音"),Toast.LENGTH_LONG).show();}
     }
-    private void stopAudio(){if(player!=null){player.release();player=null;}}
+    private void stopAudio(){if(wordAudio!=null)wordAudio.stop();if(player!=null){player.release();player=null;}}
+    @Override protected void onDestroy(){searchGeneration++;searchHandler.removeCallbacksAndMessages(null);searchWorker.shutdownNow();super.onDestroy();}
     @Override protected void onStop(){stopAudio();super.onStop();}
     private void setStar(Button b,JSONObject e){b.setText(favorites.contains(key(e))?UiText.get(MainActivity.this,"★ 已收藏 · 点击取消"):UiText.get(MainActivity.this,"☆ 收藏词条"));}
     @Override public void onBackPressed(){if(details)home();else if(searching||settingsOpen){hideKeyboard();searching=false;settingsOpen=false;home();}else super.onBackPressed();}

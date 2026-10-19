@@ -1,3 +1,4 @@
+# Build output and machine configuration
 .gradle/
 **/build/
 .idea/
@@ -7,16 +8,19 @@ local.properties
 __pycache__/
 *.py[cod]
 .downloads/
+# Local crawler data, personal records and recovery material
 collection/
 verification/
 automation/
 import-examples/audio-cache/
 import-examples/audio-report.json
+# Distributed separately in GitHub Releases
 release/
 *.apk
 *.aab
 app/src/main/assets/audio/
 app/src/main/assets/dictionary.json
+# Signing credentials and local secrets
 *.jks
 *.keystore
 key.properties

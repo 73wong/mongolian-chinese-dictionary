@@ -67,14 +67,14 @@ public final class StudyStore {
     public List<String> queue(Set<String> available,long now) {
         List<String> due=new ArrayList<>(),fresh=new ArrayList<>();
         for(Iterator<String> it=cards().keys();it.hasNext();) {String id=it.next();JSONObject c=cards().optJSONObject(id);if(!available.contains(id)||c.optBoolean("paused"))continue;
-            if(c.optInt("seen")==0)fresh.add(id);else if(c.optLong("due")<=now)due.add(id);
+            if(c.optInt("seen")==0){if(c.optLong("due")<=now)fresh.add(id);}else if(c.optLong("due")<=now)due.add(id);
         }
         due.sort(Comparator.comparingLong(id->cards().optJSONObject(id).optLong("due")));
         int allowance=pauseNew()?0:Math.max(0,limit()-introducedToday(now));
         due.addAll(fresh.subList(0,Math.min(allowance,fresh.size())));return due;
     }
     public int[] counts(Set<String> available,long now){int active=0,due=0,fresh=0,paused=0;
-        for(String id:available){JSONObject c=cards().optJSONObject(id);if(c==null)continue;if(c.optBoolean("paused")){paused++;continue;}active++;if(c.optInt("seen")==0)fresh++;else if(c.optLong("due")<=now)due++;}
+        for(String id:available){JSONObject c=cards().optJSONObject(id);if(c==null)continue;if(c.optBoolean("paused")){paused++;continue;}active++;if(c.optInt("seen")==0){if(c.optLong("due")<=now)fresh++;}else if(c.optLong("due")<=now)due++;}
         return new int[]{active,due,fresh,paused};
     }
     public long nextDue(Set<String> available,long now){long next=Long.MAX_VALUE;for(String id:available){JSONObject c=cards().optJSONObject(id);if(c!=null&&!c.optBoolean("paused")&&c.optInt("seen")>0&&c.optLong("due")>now)next=Math.min(next,c.optLong("due"));}return next;}
@@ -88,13 +88,34 @@ public final class StudyStore {
         if(rating<0||rating>3)throw new IOException("评分无效");if(hinted&&rating>1)throw new IOException("使用提示后请选择忘记或费力想起");
         JSONObject n=snapshot(),c=n.getJSONObject("cards").getJSONObject(id);
         if(c.getBoolean("paused"))throw new IOException("此词已暂停");
+        boolean fresh=c.getInt("seen")==0;
         int days=interval(id,rating);
         if(c.getInt("seen")==0)c.put("introduced",date(now));
         c.put("seen",c.getInt("seen")+1).put("last",now).put("interval",days).put("due",now+(rating==0?60000L:days*DAY));
-        if(rating==0)c.put("lapses",c.getInt("lapses")+1);
+        if(rating==0&&!fresh)c.put("lapses",c.getInt("lapses")+1);
         JSONArray history=n.optJSONArray("history");if(history==null){history=new JSONArray();n.put("history",history);}
-        history.put(new JSONObject().put("id",id).put("time",now).put("day",date(now)).put("rating",rating).put("hinted",hinted).put("interval",days));save(n);
+        history.put(new JSONObject().put("id",id).put("time",now).put("day",date(now)).put("rating",rating).put("hinted",hinted).put("interval",days));advanceRound(n,id,rating,fresh);save(n);
     }
+    public JSONObject round(Set<String> available,long now) {
+        JSONObject r=data.optJSONObject("round");if(r==null||!date(now).equals(r.optString("day")))return null;
+        JSONArray ids=r.optJSONArray("ids");if(ids==null||r.optJSONArray("results")==null||r.optJSONArray("results").length()!=r.optInt("index")||ids.length()>10||r.optInt("index",-1)<0||r.optInt("index")>ids.length())return null;
+        for(int i=0;i<ids.length();i++)if(!available.contains(ids.optString(i))||!contains(ids.optString(i)))return null;
+        try{return new JSONObject(r.toString());}catch(Exception e){return null;}
+    }
+    public void startRound(Set<String> available,long now)throws Exception {
+        List<String> q=queue(available,now);JSONObject n=snapshot();
+        n.put("round",new JSONObject().put("day",date(now)).put("ids",new JSONArray(q.subList(0,Math.min(10,q.size())))).put("index",0).put("results",new JSONArray()));save(n);
+    }
+    private void advanceRound(JSONObject n,String id,int rating,boolean fresh)throws Exception {
+        JSONObject r=n.optJSONObject("round");if(r==null)return;int index=r.optInt("index");JSONArray ids=r.optJSONArray("ids");
+        if(ids!=null&&id.equals(ids.optString(index))){r.getJSONArray("results").put(new JSONObject().put("id",id).put("rating",rating).put("fresh",fresh));r.put("index",index+1);}
+    }
+    public void defer(String id,long now)throws Exception {
+        JSONObject n=snapshot(),c=n.getJSONObject("cards").getJSONObject(id);
+        long tomorrow=Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        c.put("due",Math.max(c.optLong("due"),tomorrow));advanceRound(n,id,-1,false);save(n);
+    }
+    public boolean fresh(String id){JSONObject c=cards().optJSONObject(id);return c!=null&&c.optInt("seen")==0;}
     public static final class DayStats {
         public final Set<String> words=new HashSet<>(),newWords=new HashSet<>(),reviewWords=new HashSet<>();
         public int repetitions;

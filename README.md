@@ -156,6 +156,14 @@ adb shell am instrument -w -e offlineOnly true org.example.mongoldictionary.test
 
 字体等第三方组件的现有许可与说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及对应资源目录中的许可文件。
 
+## 1.1.0 更新内容
+
+- 重做学习首页、学习卡片与本轮结束页。
+- 每轮最多 10 个词，支持暂停后继续。
+- 新词先展示含义；复习先回忆再揭示答案。
+- 学习卡片聚焦回忆、查看答案和评分；不适合的词可在词表中暂停。
+- 保留评分撤销、日历统计与现有学习记录。
+
 ## 1.0.2 更新内容
 
 - 设置页的数据来源改为实际抓取页面链接。
@@ -165,8 +173,8 @@ adb shell am instrument -w -e offlineOnly true org.example.mongoldictionary.test
 
 ## 版本与签名
 
-当前版本：**`1.0.2-offline`**  
-Android versionCode：**`15`**
+当前版本：**`1.1.0-offline`**  
+Android versionCode：**`16`**
 
 当前 APK 使用调试签名。长期发布前应配置并妥善保存正式签名密钥，后续覆盖升级需保持签名一致。
 

@@ -12,16 +12,20 @@ import android.widget.TextView;
 import java.util.List;
 
 public class RenderingChecks extends LocalImport {
+    private boolean performanceOnly;
     private boolean offlineOnly;
+    private boolean studyOnly;
     private boolean importMode;
     private boolean guideOnly;
     private boolean storageOnly;
     private boolean searchOnly;
-    @Override public void onCreate(Bundle arguments) { offlineOnly=arguments!=null&&"true".equals(arguments.getString("offlineOnly")); searchOnly=arguments!=null&&"true".equals(arguments.getString("searchOnly")); storageOnly=arguments!=null&&"true".equals(arguments.getString("storageOnly")); guideOnly=arguments!=null&&"true".equals(arguments.getString("guideOnly")); importMode=arguments!=null&&arguments.containsKey("token"); super.onCreate(arguments==null?new Bundle():arguments); }
+    @Override public void onCreate(Bundle arguments) { performanceOnly=arguments!=null&&"true".equals(arguments.getString("performanceOnly")); studyOnly=arguments!=null&&"true".equals(arguments.getString("studyOnly")); offlineOnly=arguments!=null&&"true".equals(arguments.getString("offlineOnly")); searchOnly=arguments!=null&&"true".equals(arguments.getString("searchOnly")); storageOnly=arguments!=null&&"true".equals(arguments.getString("storageOnly")); guideOnly=arguments!=null&&"true".equals(arguments.getString("guideOnly")); importMode=arguments!=null&&arguments.containsKey("token"); super.onCreate(arguments==null?new Bundle():arguments); }
     @Override public void onStart() {
         if(importMode){super.onStart();return;}
         Bundle result = new Bundle();
         try {
+            if(performanceOnly){result.putString("stream",PerformanceChecks.run(getTargetContext())+"\n");finish(Activity.RESULT_OK,result);return;}
+            if(studyOnly){final Throwable[] gestureError={null};runOnMainSync(()->{try{SwipeUndoChecks.run(getTargetContext());}catch(Throwable e){gestureError[0]=e;}});if(gestureError[0]!=null)throw new AssertionError(gestureError[0]);StudyRoundChecks.run(getTargetContext());StudyChecks.run(getTargetContext());result.putString("stream","Study rounds, defer, undo, persistence and existing study checks passed.\n");finish(Activity.RESULT_OK,result);return;}
             if(offlineOnly){result.putString("stream",OfflineChecks.run(getTargetContext())+"\n");finish(Activity.RESULT_OK,result);return;}
             if(searchOnly){SearchChecks.run();GuideChecks.run(getTargetContext());result.putString("stream","Fuzzy search and language checks passed.\n");finish(Activity.RESULT_OK,result);return;}
             if(storageOnly){ImportChecks.run(getTargetContext());String metrics=StorageScaleChecks.run(getTargetContext());result.putString("stream","Storage checks passed: "+metrics+"\n");finish(Activity.RESULT_OK,result);return;}

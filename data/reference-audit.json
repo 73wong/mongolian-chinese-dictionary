@@ -1,0 +1,3277 @@
+{
+  "resolved": 2083,
+  "pending": 653,
+  "reasons": {
+    "additional_text": 464,
+    "missing_target": 73,
+    "ambiguous_target": 112,
+    "cycle_or_unresolved_chain": 4
+  },
+  "issues": [
+    {
+      "id": "entry-fd38a40f-e5a7-47d4-96b0-cd942bd71c49",
+      "transliteration": "kereg Sereg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-62d02cb1-24e6-556c-9dd3-49768a2e54d1",
+      "transliteration": "nomoqan dOlgen dalai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ca20adf7-e2fb-51b5-a9ea-6a5472273e95",
+      "transliteration": "nomtai Somtai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7b4f71fe-639b-56a7-a9d5-1a5bc556c513",
+      "transliteration": "numun-u kObcilegUr",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-061ac716-ffe6-5f73-aead-15db1466449f",
+      "transliteration": "numun-u tebke",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-badaeb01-092b-55d1-96c3-7ceb270a1154",
+      "transliteration": "numun-u tobqo",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0a803362-4d4e-5e09-afd5-33e8743b058a",
+      "transliteration": "morin gUyUdel",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-642c5cf2-3600-56e8-bf38-316415187312",
+      "transliteration": "muriGu sariGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3d97d6d9-f689-55b4-abe3-ff8d3559e299",
+      "transliteration": "usun telemen jiroG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ad30894f-5a27-583c-a38c-914d3c869e22",
+      "transliteration": "a Goo",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9e7c7d0b-21ea-56ae-892c-8779765c80ea",
+      "transliteration": "aingGuri tOrOkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cdbf5473-53f8-5721-8ad5-0f40e5ee145a",
+      "transliteration": "aiGuusu kUrkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-115267f0-67fd-5d6e-b00e-58f8ddd5f2a6",
+      "transliteration": "anib Sanib",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-e090e330-fb78-5bc7-bb59-e50fa6000d15",
+      "transliteration": "anib tanib",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-162b4087-6b9f-51e8-9490-67a4cdc64720",
+      "transliteration": "andaju endekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5d296810-81b4-5f93-8472-fe05dce8acb9",
+      "transliteration": "andaGai kikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3b1ed2ad-2316-515f-adbf-64c054d93124",
+      "transliteration": "andaGuraju tasiyaraqu",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-d82ce875-0084-56f9-abbb-80c4d7959f5a",
+      "transliteration": "ang gOrOgesU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-742a4c5d-818b-5af8-925c-03a4488f1ec7",
+      "transliteration": "angGaiju tangGaiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b5467bed-080c-5f6c-bd84-23c6011e48d1",
+      "transliteration": "angGaiju darbaiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0e3ba723-b659-5e73-a5be-0ec4e7324c95",
+      "transliteration": "angGaju cangGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1d1b785c-b9e9-5211-8464-d50ad6a3ed0c",
+      "transliteration": "anggijiraju salqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9a5dbaef-3697-57bf-ace6-1c5414e92a74",
+      "transliteration": "aq_a degUs",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d2aa8584-0476-52c5-8608-81ae4f0a9ef9",
+      "transliteration": "aqar Saqar",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-682194d0-68b5-51e7-8c5f-b7e47c070e03",
+      "transliteration": "aGula-yin kece",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4899e330-e6c0-59e9-99a9-25d9e54b7bf1",
+      "transliteration": "aGujiGu aGajiGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c76aa49a-ecf1-577e-b1ca-31ae172d30d8",
+      "transliteration": "ama kOrOkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-253fa054-4b5f-5b90-9d4d-665eeffed848",
+      "transliteration": "ama maGudqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fe66ceb5-984f-5159-9dae-030f0c52626b",
+      "transliteration": "ama taGlaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2573fd5c-a6e9-5b4e-8cfe-7fbdca50a551",
+      "transliteration": "ami bey_e-ben bodoqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6e063306-94ec-5a31-84eb-54043e736a2e",
+      "transliteration": "ami gUjirekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-73998b1d-0179-5e1c-b6db-fa779bd6639e",
+      "transliteration": "ami sUidkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5fa00b7a-ae5e-5857-a7f2-451c8c382a25",
+      "transliteration": "ami dUikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c0a5b652-cc6f-5839-bb36-e6535177e81f",
+      "transliteration": "amisquG_a tasuraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ca9f7d5c-9990-58c0-aad1-af5bc41192ef",
+      "transliteration": "amisquG_a daruqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6675b36e-fb6a-5406-a12d-7b03d9c02f22",
+      "transliteration": "amisquG_a degeredkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8e2a6cc6-6955-5bae-ae7d-ee1a5f6f2d31",
+      "transliteration": "amisqul bariqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8be11309-be84-5478-8dc0-739cf5c098d5",
+      "transliteration": "amidu-yin joliG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-722653da-8428-50b2-9003-260888eb21a3",
+      "transliteration": "amusiGulqu masin",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d803f784-2511-5104-95b2-6cedb22dd471",
+      "transliteration": "amtatu kemke",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1c915718-40a8-59e8-822c-33f37cef0c30",
+      "transliteration": "aluslan tariqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8930f54c-ccc7-571b-b211-1bbe495dbf92",
+      "transliteration": "almang sUke",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-85788ec4-3e08-5886-8c7c-4570171f19cc",
+      "transliteration": "alcang alcang",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e019d917-99be-5276-ac69-f8a48bd3fe05",
+      "transliteration": "alcaG calcaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-12ec24c9-fefb-53a8-b4cc-f86bc8873d65",
+      "transliteration": "ataG_a jitOge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-85bb0fd6-84aa-580c-ac41-cb868a07fe0a",
+      "transliteration": "aruG egUrge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d7b604c9-c0a0-5f77-b77c-a2d9ca9101b3",
+      "transliteration": "arbaGanaju sarbaGanaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-91f1ac39-bcb3-5fed-9350-76ac1268e1a6",
+      "transliteration": "arG_a SarG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e2e160eb-59d0-5ec4-b9ce-f9074c948104",
+      "transliteration": "armaju tarmaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8bcf1f84-d9b4-5958-881a-30939c9eac16",
+      "transliteration": "arjaiju sarjaiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f21aaeb5-967c-5429-89d3-437e6ce6243d",
+      "transliteration": "arjaG barjaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-6bcefb0a-511a-5732-a23d-f1d4aa334aef",
+      "transliteration": "arjaGai barjaGai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-95dca7f8-7ce0-51a4-a3ce-9e35efa1486a",
+      "transliteration": "aGaru(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-9bcf1fab-ae83-5939-8fca-53134cf9a130",
+      "transliteration": "aGaru(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-ac92c5dd-771e-5894-8803-8e47ba4b404c",
+      "transliteration": "aGta(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-59826e79-ffd9-5aac-9dd4-1b610a195faa",
+      "transliteration": "aGta(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-0b94e45a-26df-579a-a2e2-48861de837ca",
+      "transliteration": "alaG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-ba652694-24ab-54b9-b575-968823a0e61d",
+      "transliteration": "alaG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-b4562335-8593-5780-8ed9-3bd6e1cd510c",
+      "transliteration": "alasi(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-2d9c94b3-0f24-5107-8045-75a866e0e253",
+      "transliteration": "alasi(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-8e31fae9-e22f-5605-9956-e9d782002355",
+      "transliteration": "aluq_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-2198383b-4141-57e6-a6fd-4fc2cd4af9e5",
+      "transliteration": "aluq_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-3ff0c2e0-db04-57a0-960d-22723f0c1258",
+      "transliteration": "ajirG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d2adc96b-fff6-5124-bfba-749996aa4390",
+      "transliteration": "ajirG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-eda057ca-1a57-589a-8006-e18ff4c9042c",
+      "transliteration": "arG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-05d2948b-7ea2-5c5c-bbe5-c801e7de26a7",
+      "transliteration": "arG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d3354f97-e736-57ba-a518-0d3bb7802b8e",
+      "transliteration": "baraG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d2accb32-7ea4-5746-9f6d-acdae5d47804",
+      "transliteration": "baraG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-8a38e737-c18d-5e7c-9ed7-11701754a9ef",
+      "transliteration": "barilG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-62f4d368-2e34-5c23-8087-80d6062e66d2",
+      "transliteration": "barilG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-9251ae19-ea92-5981-98ed-87ded3c3ad4f",
+      "transliteration": "bariy_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-afe3e710-ebb7-5e60-8a21-32953060a63b",
+      "transliteration": "bariy_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-dfdd0394-ae5c-5d87-af5a-bb039148e605",
+      "transliteration": "bariy_a(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-5712cd7d-b097-5b31-8b99-8b580efaf561",
+      "transliteration": "bariy_a(n) /4",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-7763f6fb-0ce2-5657-afac-35efc7cd3fa5",
+      "transliteration": "bUriy_e(n) /1 ～ bOriy_e(n)",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-c2883626-33e4-51cb-8c11-9431768c2ffe",
+      "transliteration": "bUriy_e(n) /2 ～ bOriy_e(n)",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-acc63336-a965-5db9-a898-ad8a1e7c2156",
+      "transliteration": "baiGali saGuqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ab733cc5-3db1-57b5-ae4d-4e8d1b8a5930",
+      "transliteration": "baG_a mal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-85b2b5da-fb24-51db-abf6-5119676cef69",
+      "transliteration": "baGuraju doroitaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ce0b9868-aee5-5756-b736-f369218c602e",
+      "transliteration": "baGbaqai ceceg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6e611905-6199-592d-9ebf-24a12ddfc86c",
+      "transliteration": "baGtamji Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1422a546-013f-545f-a07b-e7cca6abffc7",
+      "transliteration": "baGtamji maGutai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c9dd0ba2-6132-5f76-9421-f85988e7229a",
+      "transliteration": "baGtamji saitai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-79c55b37-7b40-5a03-8e10-4c82598c9846",
+      "transliteration": "bad talbiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-59cc3fb1-1317-5b04-94f0-56c755525c14",
+      "transliteration": "badir sibaGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5689d0ef-ac72-5dab-8f7f-cc02afbbb315",
+      "transliteration": "badm_a lingqu_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ac5cf690-b4e2-5203-a87f-f98fb2b7a90c",
+      "transliteration": "bar_a segUder Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-51839bb6-9fc7-56f4-b4a5-f7d413ce309e",
+      "transliteration": "bar_a toro Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-824755f4-9305-5be9-a8ee-6428db6ae224",
+      "transliteration": "baraGun uridu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6c85094e-37da-5935-afda-427a0c23ca33",
+      "transliteration": "barim talbim",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8f2f2400-90c0-5d08-8516-e032d5f27c9b",
+      "transliteration": "bariy_a joGos",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ad4ed1cd-28c2-5353-af96-25fb31e50474",
+      "transliteration": "baruiju bUrUikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-43dfd00c-ec97-5aca-abfd-f9bbf3f99e12",
+      "transliteration": "baruiju kUreikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-21907066-bf2c-56c4-8af7-071990bd7224",
+      "transliteration": "baruG tOlOb-i ni UjekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c6c14b82-476e-595a-9b88-6b09b4d51d8c",
+      "transliteration": "baruG tOlOb ni taGaraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-91af8cda-7c85-59b1-9e45-f6fc2ea2f982",
+      "transliteration": "beri ceceg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9d7bd057-dd3d-5781-adbc-484e7f851447",
+      "transliteration": "bilca cilca",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-288c5a0e-cdcf-52b7-afd6-e13a17563fa9",
+      "transliteration": "bilcaG cilcaG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a40ff592-e40e-5c1a-b79e-8dd67964c7ee",
+      "transliteration": "bitegUU qataGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c9a88186-0ad1-5a01-9981-55d7a5073467",
+      "transliteration": "bitegUU quusa",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4c2d1509-f407-5538-bfeb-f6a77505058c",
+      "transliteration": "bitegUU kOdegUU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b200d706-75ca-5fc2-9def-2fc032c99e01",
+      "transliteration": "bitegUn kikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-28f44fa6-190a-53d7-8575-9e9aa0a44135",
+      "transliteration": "biciqan jerge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2105a9c5-c92e-5cd9-8ab9-120a68336371",
+      "transliteration": "bolki tolki",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1959356a-ba12-5273-b511-b1a91caf0409",
+      "transliteration": "boljoG_a Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-590ae4ce-f9b3-5212-9aa1-9921eb1f0ffd",
+      "transliteration": "boro qaraGcin",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-667279c8-46d2-5736-9350-ac34169d9cf6",
+      "transliteration": "boroGan baGuqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5e819fde-b3ed-54fa-bab2-59dd4dfb1312",
+      "transliteration": "boroGan SoroGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0026e947-b6a9-5843-a97e-1f3b7d513fa6",
+      "transliteration": "bulciiju culciiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-89240b2d-073d-568b-aa31-30fb25856210",
+      "transliteration": "bucalta Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-ae9387d1-2d52-50a3-93f3-176872e5e890",
+      "transliteration": "buruGu mOr",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-48c5ede4-88ad-5c3c-9cc1-626cb168df43",
+      "transliteration": "bOgesU kiGursu",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d47e1d38-0754-5b38-9b66-95af25a969cc",
+      "transliteration": "bOrtOg bOrtOg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1ac26a98-04b0-578f-8e7a-82094b4f1f33",
+      "transliteration": "bUdUgUn baraG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2de38a04-b42d-576b-b60b-09562405c2a7",
+      "transliteration": "ciki(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-b364ca17-6c1c-52d7-9ecf-2ff9772f9006",
+      "transliteration": "ciki(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-6c396f43-6c52-50f4-8bc5-02c757dfe275",
+      "transliteration": "ciki(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-839002a0-7204-59ec-b594-229d85eda78c",
+      "transliteration": "cangkin caGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-758f35fe-8f65-5120-9937-df6eda579327",
+      "transliteration": "cangkir caGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f0bfdf2b-f3be-5f21-8605-067498c6314f",
+      "transliteration": "ceber ceger",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-15f87106-6828-5e22-a576-48c0ea8989c1",
+      "transliteration": "cegeji ebedcin",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b8c2fdac-1485-5ed0-a70c-4ab4f8d5ea2d",
+      "transliteration": "cibaG_a ebesU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4e86525e-1b45-567f-9d5c-6e85bdc39613",
+      "transliteration": "cig-iyen qaraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fc871366-f55a-5430-b1f3-10e17a5c9d4d",
+      "transliteration": "cim_a jiGasu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-33450b95-5974-5337-96fb-97380f18a30f",
+      "transliteration": "cimege anir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9e40f342-1b4f-551f-9f5f-b2ae10da9e41",
+      "transliteration": "cimege imege",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2f149de2-5436-5c47-84ca-0d454ba82cc4",
+      "transliteration": "cilaGun cai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6f967cd1-b51d-5c0c-887f-2a5a09c15cc7",
+      "transliteration": "cilOge jab",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f634efa9-00ff-5e2a-b8fa-71f60dc9d130",
+      "transliteration": "cisun-u bOgem",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6c3addd4-ceef-57ad-879a-6162cac0ba17",
+      "transliteration": "cisun-u caGan bOgem",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8227fbd7-b04f-588c-a658-dc4073352480",
+      "transliteration": "cidkOr-Un Gal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1c3222d9-b2bc-5eb8-aef6-b8313fbaa30a",
+      "transliteration": "cicijU Gubiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-58f8b65c-0163-598b-b8ca-28c39b1edf4d",
+      "transliteration": "cirai baGulGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8f5ef876-bbc8-553b-8f3b-aa690b89ab11",
+      "transliteration": "cirai jisU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f82c44d6-393c-5ad7-a77b-2045dc4adadd",
+      "transliteration": "circU cingGaGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f20ad361-12aa-57c5-8139-d94d42192148",
+      "transliteration": "coqoi-yin bir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bf920fbb-c23c-55c4-ba40-692afcc8e03f",
+      "transliteration": "coG jali",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ffad5d00-c57d-5e9d-b9a8-803c2a3e4fba",
+      "transliteration": "colmon coqor",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0d3bdd98-af7d-5a45-95ed-bf1b12961c68",
+      "transliteration": "cocis kikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ac8a6ff0-f73e-5a72-8c9a-2b0077744e1c",
+      "transliteration": "cuu-du Garqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b9a8d942-ceb0-5d80-b244-ddc3e1250edf",
+      "transliteration": "cuu cimai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c53fe091-ec1d-501f-af18-f4c195d26c50",
+      "transliteration": "cubuG_a jam",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e302633b-ab69-503b-9ed3-a2ea0158cdc5",
+      "transliteration": "cuqurilta Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4378d831-f0fd-5af5-a8aa-5e3d93111180",
+      "transliteration": "cuqurisi Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d37508df-4b53-5494-9d3b-5d2131ffc430",
+      "transliteration": "cuGu ociqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bc360822-b4f3-5a50-ac96-36bf33b5d2df",
+      "transliteration": "cuGu talbiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fcd66e88-4665-5622-9558-a54ddfde525c",
+      "transliteration": "cOcOgei-yin toso",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1076d68f-3697-582c-8bef-7f2dd8e71bc2",
+      "transliteration": "daG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-aee9235e-98af-5080-8cf4-fbdc0ae804a4",
+      "transliteration": "daG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-8059a09a-c4ce-5b0e-85c6-cbdcfa51f2fc",
+      "transliteration": "daibaG daibaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-cb305bcb-44b4-597c-bfcf-57a5c1ffba21",
+      "transliteration": "dailaju Sailaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-12b932fc-e0c1-589d-8531-cf2435f25830",
+      "transliteration": "dabaG_a kObege",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-62699744-e7cc-5671-bd0c-e4c1e309384d",
+      "transliteration": "daliu eber",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c6959f22-a76f-5cea-a6da-afb3ef441a55",
+      "transliteration": "dalba ociqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1db04d34-a5a2-53b4-8206-db3c7b379a70",
+      "transliteration": "daljing daljing",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-8b836b53-26d7-5817-9b34-da1e923a9be9",
+      "transliteration": "debel qubcasu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-312ff184-567c-59ab-9ae5-b3491c679562",
+      "transliteration": "delekei yirtincU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ecf1bc5e-e72f-5295-8a57-455414b39fce",
+      "transliteration": "der_e debisker",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8509aa7b-2835-5654-a367-da89a6929d4d",
+      "transliteration": "derdeger dardaGar",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9f55e15d-6572-54b7-a8c5-05a42f518841",
+      "transliteration": "dobo sonduula",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-14aace9b-0119-53a0-9475-808c59a83fac",
+      "transliteration": "dobtolju sibtulqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1252056f-bd43-5f66-9589-a0e18433b2a7",
+      "transliteration": "doGoGsi saGulGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d3dc6811-fad6-583c-8cf1-3ebbb67f2c74",
+      "transliteration": "doGolang soGolang",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-1cee2b36-08c2-5a92-805a-902fdb7b8a71",
+      "transliteration": "doGolang degeleng",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-965771b3-0f23-5687-9bfb-56d52d2aa77e",
+      "transliteration": "dOrbeljilen alququ",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2c495984-c9c9-51ee-b144-1f5941a17762",
+      "transliteration": "e kei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-52e81b78-fa5e-58c0-af9e-daeb307f3af9",
+      "transliteration": "e daGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e8106fa2-3636-5553-bd21-38a23bea8460",
+      "transliteration": "e daGu talbiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c1382f58-64c2-5397-93b5-4c64f7fa489f",
+      "transliteration": "ein kU atal_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-71370570-7992-5b15-b459-902e3e9e66fc",
+      "transliteration": "ein kU bolbasu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7d3dd65f-a0d0-568a-b477-4bfbe60b3168",
+      "transliteration": "ein kU bOgetel_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-229ec51b-49e2-5804-9ecc-86d3a3f18e6a",
+      "transliteration": "ein gebecU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-85b5abe5-4241-5a14-8308-0a5e25cc68c5",
+      "transliteration": "eimU abacu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-232762c7-c4dd-5648-a957-5cf9c8600568",
+      "transliteration": "eneteigUr teneteigUr",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c4da9d0d-6350-5520-b921-33872bb5decd",
+      "transliteration": "endekU Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-adf67458-4af5-5ef1-ac70-67411c6d7e32",
+      "transliteration": "engselUn dengselUn",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-8f194fde-dd5e-5afc-b812-03ece818d2c0",
+      "transliteration": "ebesUn bOkOge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7e6aeaf4-cf52-5c96-9b6f-1cb1cc98a378",
+      "transliteration": "ebedcU kebtekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9fbc90d2-73fc-5137-9b26-3c252ece2648",
+      "transliteration": "eber teber",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-1e24158f-1a14-5ff6-8623-94d146e97dce",
+      "transliteration": "ebdejU tuyaciqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-98eb7f43-a897-59aa-9817-c30f74a0c9f3",
+      "transliteration": "eke-yin umai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c1efe1aa-cd97-590c-90d8-614ec05192e2",
+      "transliteration": "egelji kerege",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c22b8fbb-36be-5167-b5ea-35d9e1183c2a",
+      "transliteration": "egelji duGur_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-592444d6-e291-549a-b480-24430260a168",
+      "transliteration": "egedUU quuduu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-badf2488-d634-55db-9589-0a4aaff576ed",
+      "transliteration": "egedUUrejU quuduuraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-62a8f7f9-449c-52ee-9d61-a675642d0390",
+      "transliteration": "egsin bUgsikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-82c06b81-da50-5e6d-b6c8-48221c0dc4c8",
+      "transliteration": "emjeg qaGucin",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-14364101-4e87-5a90-b442-0e5f96d517cc",
+      "transliteration": "eliy_e orosiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-978470b4-b42e-5165-acc0-79e4d354517a",
+      "transliteration": "elgUjU abqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d50a521b-a38e-5c99-bd09-73928c3d2393",
+      "transliteration": "elgUjU tUlkUkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-32d741f6-41b2-558e-8d91-17ccb10de237",
+      "transliteration": "eD buD",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d69963b9-dff1-5d6a-8315-3104069b5f6c",
+      "transliteration": "edei buudai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cb0087ac-ad7b-579f-9fa1-49daf29c2846",
+      "transliteration": "eder teder",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-d5da9d21-7aad-5eba-adda-7f9bcfe12347",
+      "transliteration": "edUicinegen tedUicinegen",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-75507514-b05d-525c-96aa-8557a1121907",
+      "transliteration": "eje esi Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-34778dde-a190-568c-9a61-0d06bd9dae76",
+      "transliteration": "eje Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c84a36b0-2e2e-52f0-a1d8-6353c8274ac0",
+      "transliteration": "eje medekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-72cf6be5-e199-527d-bd9b-48a27361d60d",
+      "transliteration": "ejen bolqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d042b4a1-28df-5822-a300-0f1029bb24ca",
+      "transliteration": "er_e-yin jerge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f48b2238-6801-5b52-b25d-09dc47ee7af3",
+      "transliteration": "eregUl siroi",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-35f0b0c2-382f-58c2-b331-ba0a501a024e",
+      "transliteration": "erijU suraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-54c0097c-fe3f-5f11-a677-74ba27714e91",
+      "transliteration": "erijU suraGlaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fda7532b-ec7b-5dcc-ad34-1633e5ba2a10",
+      "transliteration": "erilge suralG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-32a7adc3-9d5f-56bb-a08f-340598460ebd",
+      "transliteration": "eriyen coqor",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a0ed9d7f-038d-5f39-8457-2c6d241fef54",
+      "transliteration": "erUi tarui Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-a10b6302-5d02-5fd9-8d54-377f9e1520e9",
+      "transliteration": "erUke daruqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8c46ead7-4bc4-5ee1-97d0-1d3231bc6b0e",
+      "transliteration": "erUke dOrbeljilekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-017c1ced-de5b-573c-9b1b-fc82a4eaeb68",
+      "transliteration": "erbeg terbeg",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-90b2c855-7a9b-5422-ba84-8dc937bea963",
+      "transliteration": "erUke(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-327d1fbc-a626-5c66-9a15-1c64c56c7afc",
+      "transliteration": "erUke(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-a401e345-dd18-58a2-ac8f-7a0d88c1a010",
+      "transliteration": "erUke(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-be128567-ba23-561f-b5b4-233c506f583a",
+      "transliteration": "erke(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-78111022-53cd-5744-96ae-e01d45182572",
+      "transliteration": "erke(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-c8f47d6f-2edc-58de-9aac-69969258f970",
+      "transliteration": "erke(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-7a5d373e-f4bd-5abd-9abc-1b736caa37a4",
+      "transliteration": "ergi(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-90deeb72-5836-5517-98d1-81f67fd7b914",
+      "transliteration": "ergi(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-e64a3f01-2ce7-5a65-954f-11f2cd8365dd",
+      "transliteration": "geirejU gegerekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c943757c-865a-5ec3-a73d-df86ff3a89cc",
+      "transliteration": "gekiijU Gokiiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-aa88061f-19f7-5016-a416-5e021f0780a5",
+      "transliteration": "geking Goking",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-ae8b82f9-f714-5ca3-b390-33780c4bf155",
+      "transliteration": "gekiljejU Gokiljaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8a17479c-bf09-55ce-95e3-6c2b6b170f24",
+      "transliteration": "gekis gekis",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-71e58c8f-3d10-577b-96bb-83467b3fb823",
+      "transliteration": "gekis Gokis",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9cd6ca4d-1fb7-5afd-9904-79fa4e48a953",
+      "transliteration": "gegen qubilGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d253e68a-97df-5721-bd0e-4940f5cb31f6",
+      "transliteration": "gegerejU cairaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ef4c3f0a-3d50-58f8-af49-db7d6bd08de8",
+      "transliteration": "gem jem",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d2a513b5-8d44-5663-8a75-f93877a53fac",
+      "transliteration": "ger oron",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2749828e-eb95-55f8-862f-6980e6dc2900",
+      "transliteration": "ger_e kikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e0446b2c-dfde-5f1e-847e-d69550832b83",
+      "transliteration": "ger_e toGtaGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-abf12868-7889-5f3f-b2fd-4632e0e73343",
+      "transliteration": "gilaiju cilaiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a2f22760-62ce-5ea4-8b20-50aaede2f05e",
+      "transliteration": "gUbijU gUbsikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-980ece6e-8adf-5a29-ba0b-a4467967efaf",
+      "transliteration": "gUldege gUldege",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-8f4a4622-426b-5a2e-91e3-a59deb6ed905",
+      "transliteration": "inji daGalta",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b2388a29-4dbc-5ed3-8237-9dc5ce4a6665",
+      "transliteration": "ibir jibir",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-03e43b2c-0462-5222-bba1-b3f6c94f3321",
+      "transliteration": "ilegUU qaliGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f9d79f80-5a7a-5378-8cbf-5cda94646cc3",
+      "transliteration": "ilegUU-dU UjekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c8869df0-e0b7-5b68-9a51-949d8905c831",
+      "transliteration": "ilcaG ilcaG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a2c8a55b-b305-5501-a3a8-49a8438b16f0",
+      "transliteration": "ilcaG nilcaG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-37af355b-65e4-55f8-9399-9f5c58de9388",
+      "transliteration": "ija ociqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-660feb5e-b3ed-5334-9e01-848d82e2a4a6",
+      "transliteration": "ija baGuqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5b8b9146-cc8b-587a-a4b9-4f648b35edea",
+      "transliteration": "ijaGanaju bijaGanaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8ee88c37-0266-528c-8a55-69bb030cbb65",
+      "transliteration": "irbaG darbaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-d751565f-932e-5d1a-b357-bb008bee8d82",
+      "transliteration": "idege(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-fe070983-a30e-5c92-976b-8c4662e0184f",
+      "transliteration": "idege(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-075749de-3252-5307-b8e0-bdc2e56a878c",
+      "transliteration": "idege(n) /5",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-3099d16f-b1d6-51ff-8fd1-8b78de734eb6",
+      "transliteration": "ja qai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4aadbd15-7dd4-5644-ac13-046e97e718a9",
+      "transliteration": "jaq_a jaGaG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9dcf2dc9-83a8-55dd-81ee-9a923429e99f",
+      "transliteration": "jam qarGui",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a86cf6a2-c30b-5858-b89a-52929efc6ba7",
+      "transliteration": "jel_e degesU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f5feeb7c-3744-5c5b-acac-204f77ba1729",
+      "transliteration": "jun jusaGal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b9bb7deb-b8c5-5dc4-8658-e793fd01d848",
+      "transliteration": "jun jusalang",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1a38dfe1-5ebc-5609-9c5f-96c774796b66",
+      "transliteration": "julai-yin nUke",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-946c8150-2042-5bbd-ac9a-8b9458fa39b7",
+      "transliteration": "juljaG_a SuljaG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f27a9392-9396-52a9-a980-1f032433b62b",
+      "transliteration": "jObtei tal_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6eb4c660-989f-57af-80d5-7f55ff9c41c4",
+      "transliteration": "jUlde abqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-940a2921-e65d-54e7-a3f4-10410cb1fcb7",
+      "transliteration": "jUderegUU judaraGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-048922eb-4df5-57d0-a5b9-1afa616c7d87",
+      "transliteration": "kebtesi(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-e14678f5-4501-5910-a6dd-c2d53cd6542d",
+      "transliteration": "kebtesi(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-58419d62-a220-5e99-8385-4fc5b355235d",
+      "transliteration": "kele(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-0d6b331f-5620-5568-b14a-ce1411a8a3dd",
+      "transliteration": "kele(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-46cd1b1c-e2b8-5606-8032-9eb97f7cc7c8",
+      "transliteration": "kObci(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-f0a38306-51dc-5bd7-a47f-4f0c0cb4d820",
+      "transliteration": "kObci(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-aafbbddd-fa58-5d8a-ac46-f65fd18cb7fe",
+      "transliteration": "kOkO(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d65c7394-2db3-5404-8372-dc43efcd301a",
+      "transliteration": "kOkO(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-5b9e2e5b-5d35-5ee4-b758-dddc80c4e3b0",
+      "transliteration": "kOlOsO(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-0ff72f1b-d705-5327-878c-11ab400e5cdd",
+      "transliteration": "kOlOsO(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-10e94d34-349a-50b3-994c-10dfa3273e15",
+      "transliteration": "kOrOngge(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-1463fed9-0f0d-547f-a718-b698da1cc23a",
+      "transliteration": "kOrOngge(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-e3bdc12b-2a50-5c2b-8206-5e4ac525140d",
+      "transliteration": "kUriy_e(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-1be1bf6f-1ca4-5eda-8367-bdfffbd8aed1",
+      "transliteration": "kUriy_e(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-bc3ee111-3dfa-574d-8c9e-f5a01a6d4586",
+      "transliteration": "kUrm_e(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-e965fa7f-37c0-5bf1-aa19-689c91932f52",
+      "transliteration": "kUrm_e(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-4081e342-7dbd-50d8-ada1-bebf3a871907",
+      "transliteration": "kei badaraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-48e70ee6-fd53-5f88-bd62-bb0068c387cd",
+      "transliteration": "kei tasiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a13eaa63-21f9-5e25-87f2-bc8d09b9571c",
+      "transliteration": "keUken orgil",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e3fed01c-0cfc-5f12-9d9a-7c8f2c477173",
+      "transliteration": "keUked ergUkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-da9d16e0-0cff-5bde-81da-afc9bfc297b4",
+      "transliteration": "kengsigUU talbiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c33be183-97a5-5649-b5e6-37e57bf11277",
+      "transliteration": "keblel-Un yangju",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fc578edf-b187-5823-be00-a482fb265641",
+      "transliteration": "kekUdeg cegeji",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6109f290-da87-5170-afb8-5f98634d3390",
+      "transliteration": "kemnen arbilaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9d317542-fc36-545f-851b-8fd1b76066e3",
+      "transliteration": "kele yabuGulqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b0610950-6644-56f8-9229-3f9e431c10fc",
+      "transliteration": "kelberi-yi barimtalaqu Ujel",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-35f4d373-e483-5002-b4d1-ff448ca88636",
+      "transliteration": "kedUi cinegen",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c1ce9a32-d9bc-5c2a-9912-4699b0ef60e7",
+      "transliteration": "kejiy_e yajiy_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f6c8233d-54cd-59df-912d-adaa85f78095",
+      "transliteration": "kingG_a tingG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d19d23c6-cae4-5393-859c-64a4bb47a407",
+      "transliteration": "kigiri dalbaG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4b7ae686-2157-5dd5-9725-71adb58ca2bd",
+      "transliteration": "kilab qulub",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-5f9024df-0f2a-5fb2-a744-ffdb314f9543",
+      "transliteration": "kOndelen Goltolan",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-cd2f9b24-11a3-5f56-ad3c-d0b5403148e5",
+      "transliteration": "kOngger cokiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0bb1f9a6-fbcf-560a-9f32-3f84f3991b57",
+      "transliteration": "kOnggerejU SOnggerekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bc033837-427a-53d1-af63-e6e2fc806654",
+      "transliteration": "kOkOjU mOmOkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-778d1ec7-aef3-538e-8e3d-3cf9c6ef9930",
+      "transliteration": "kOl tataqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f90d8c9d-e536-5efe-9330-0fbeb0ca44c3",
+      "transliteration": "kOl cegerlekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1533d857-780f-5e26-92e5-fc75583836a2",
+      "transliteration": "kOlOsO cidququ",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c7ab8eb8-2612-5db3-949c-dbbe596b7316",
+      "transliteration": "kOdege aju aqui",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f2cbc78a-7519-5a08-b8d3-724a44024d17",
+      "transliteration": "kUndU surtal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7da1e3b6-cfdc-5d79-8a7e-22b73319b47e",
+      "transliteration": "kUgdUs kUgdUs",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8c827431-4da8-5761-8629-3147d0d8e9e9",
+      "transliteration": "lai barcid",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-62126cda-67cd-5a71-ba5c-80f362fe3a2b",
+      "transliteration": "lai lanciG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-748998b6-0325-554b-8c69-c51992f29bc5",
+      "transliteration": "lai lobsi",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3787e551-2a50-5d29-8df8-0b4381cdb6ff",
+      "transliteration": "lai loG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e2199faf-fb73-598f-b57c-e3177ef5503f",
+      "transliteration": "lanciG tataqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7e3e0951-f770-5e20-83a8-75dc6c7b7e16",
+      "transliteration": "lablan asaGuqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-036016bc-1874-5571-b260-9ee1b334c5f3",
+      "transliteration": "labtang sabtang",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-c27d8c44-336a-55b5-9419-b1f4dd39552b",
+      "transliteration": "labdaGun SabdaGun",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-12b3b464-3119-5bc5-b9dc-0c92d145c63a",
+      "transliteration": "lelbeijU delbeikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d9cca856-3ec5-5a64-a822-8e51a97cc35d",
+      "transliteration": "lUlU qudduG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-eb7eaa59-8da6-5188-afd2-49f208371fe0",
+      "transliteration": "lUwEquwaSEng",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3385c20d-33e5-55b9-abf2-bf64de89b340",
+      "transliteration": "manu(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-9d0a8c09-b9b1-545f-a1f4-0e3e18a74f27",
+      "transliteration": "manu(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-4ca9e33e-f48b-52d9-953f-1cc9e7eddcfb",
+      "transliteration": "mOcelge(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-857d57ff-30fc-51ff-aa0d-f369c86120d9",
+      "transliteration": "mOcelge(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-40ac544e-e8da-5af3-81d2-e052a6d0ee6f",
+      "transliteration": "maitaG taitaG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-df34a84b-a7bb-5496-8268-0818ec1e60ae",
+      "transliteration": "manaraju tUnerekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-73175bb2-fcbf-5951-a7d4-e5c61440c80a",
+      "transliteration": "medege selege",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-df204d9e-92d0-566e-8848-969c081fce82",
+      "transliteration": "mergen secen",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c165557a-c0c9-59c6-8c03-b2e7051ec99c",
+      "transliteration": "miriyan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7fa4fd12-3650-5173-a8e5-2b6cb8de6f2c",
+      "transliteration": "moqoGoju GartaGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-10425bab-3505-575b-81a4-61d5a1bc4e66",
+      "transliteration": "mung Ugei arbin",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-5a4d0e9b-8048-54b0-8054-08602acbdc5c",
+      "transliteration": "mung sung Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-ed314812-a4b1-5a8b-9e60-125dcac1ecb5",
+      "transliteration": "muqur-tuni tulGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-24d4e9c2-885f-50ad-9e52-4bf212d617c4",
+      "transliteration": "musing tusing",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-0c9c679d-c485-5e69-982b-fd124961ac2c",
+      "transliteration": "musiG tusiG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-ae790693-ee94-53c7-9842-381b7fcb7bfe",
+      "transliteration": "mOr gegekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8adc2897-85cf-5ec7-8bc5-427d8aa2fc8e",
+      "transliteration": "noir(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-7cdc5393-e5e8-5f0e-b5ec-e61c8785ad96",
+      "transliteration": "noir(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-4cfd14de-ef9c-55de-b258-e51f06fb7f69",
+      "transliteration": "nuGusu(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-7c8652db-dbbf-526a-9f8e-0144bcb22961",
+      "transliteration": "nuGusu(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-40df4345-c668-5e5f-9848-a5e020475a94",
+      "transliteration": "nuGusu(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-ac7146e5-b3bf-5d0f-8eb2-c2e712cda460",
+      "transliteration": "nabtang sabtang",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-7dd6f846-5b7f-5363-817d-634abbaa3ca3",
+      "transliteration": "nabtaG sabtaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-bc58701a-89dd-5d12-a079-13eee451a8d4",
+      "transliteration": "nakis nuqus",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-f016629a-ab7f-5436-bf82-87ddf94b0dbf",
+      "transliteration": "nakis dakis",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-fd1177a4-ff6a-56b8-bb24-fb228e1b98a4",
+      "transliteration": "nam jim",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3bc65602-f412-5f3f-aad6-d8fea37f3f62",
+      "transliteration": "namuiju nemUikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bfdb2ed2-46b4-5714-bccf-a44fb9c50400",
+      "transliteration": "nacin Songqor",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2eb5d8d2-9785-5b51-8e80-c6c677c41cf7",
+      "transliteration": "narilaju Sarilaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9ba76c7d-0759-526b-89cd-0eab2673be6b",
+      "transliteration": "nebseljejU sebseljekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bb1c32f1-1dac-5172-b47a-76e4adb24afe",
+      "transliteration": "nebte sibtu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-be004933-bf5f-5d72-b0d2-9b77bbdd0556",
+      "transliteration": "negUdel baGudal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-544b928a-f8e4-59eb-a88c-4916be93bcb4",
+      "transliteration": "ner_e nOmOrOgUlkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ee239302-f0c5-5431-b970-53f23409a119",
+      "transliteration": "ner_e coqoqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-25d9c762-bcfa-5e12-bcc0-14f8456f1ded",
+      "transliteration": "ning",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c87e86a0-9a6d-54f2-b33a-04fdfc5c368b",
+      "transliteration": "ning qoroqai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f117ed09-e888-5d4a-a335-3346cdf780da",
+      "transliteration": "nige UjegdeldU jUcUge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ff21ae8f-b051-595a-8307-a25ac41da089",
+      "transliteration": "nige jUg bolGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-66926b16-b0ce-58a9-b931-2807be223aa0",
+      "transliteration": "niGur-un emUn_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f486ec54-994f-53aa-8c57-8b83b4802c97",
+      "transliteration": "niGur jujaGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5b64e0a1-7bc2-5504-b78a-c193b60e5cee",
+      "transliteration": "niGurtan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-dbb36557-1e2c-5d4a-8776-13d16edc5bff",
+      "transliteration": "nigUl quriyaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-456b4dd5-f109-568b-aff9-87d34020bbbf",
+      "transliteration": "nilca ociqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-39f411b4-329e-5cb3-864d-1c23e533f62e",
+      "transliteration": "nilca bilca",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e78b1b67-5343-5f5b-87e0-87eb594cf769",
+      "transliteration": "nilcaG bilcaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-d92f0d03-f936-582b-98ec-bed5afb7ac29",
+      "transliteration": "nilcaGar bOkO",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0f25b0c8-a242-559a-8e54-3435c392f984",
+      "transliteration": "nidurcu siturqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fef17fa1-bf03-51ad-a137-9015354658e6",
+      "transliteration": "nidurG_a nuGusu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5d7ee304-5a74-5a19-b6c3-66d1e50633db",
+      "transliteration": "nidurG_a sidurG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ae34c7bc-9ad8-57a8-bb78-afe4b1ca7c64",
+      "transliteration": "nidurG_a tulGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-edf7f663-b0b1-597f-a96c-6507b85c92db",
+      "transliteration": "nidU cabciqu-yin jaGur_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1e10f9a9-de3d-5a72-93c4-1d88eb70580d",
+      "transliteration": "nidU cilekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-238c926a-7dce-5bb7-b68e-bec25ef5c7f9",
+      "transliteration": "noqai jangGuu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7e841218-ae8a-5c0c-8e95-e3879d37ac06",
+      "transliteration": "noGoGan gUreljegen_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7610ac65-079b-57fa-bddd-a2aaaf1d5bca",
+      "transliteration": "noyan sisi",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f4ad346b-94dc-50cb-baf1-05a3982f9518",
+      "transliteration": "noyarqaqu bairi",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0f96065a-49e3-5709-8006-21ccace320a6",
+      "transliteration": "nuGuralta Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-a8446b13-a4fb-57e9-9694-07ee92961866",
+      "transliteration": "nOkOgesU qalaGasu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9f2efbc1-50d2-5be4-9f40-350a8508ae74",
+      "transliteration": "nOkOgesU tOkOgesU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d9c8359d-c297-508d-a57b-e111171de56e",
+      "transliteration": "nOmOgen nicUgUn",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d218df22-5366-5016-97ef-cf2f208f6f3e",
+      "transliteration": "nOmOgen SOmOgen",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3199aeaa-02c9-5fae-998e-f7598d849180",
+      "transliteration": "nOmOgen tOmOgen",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1d9d2bc6-fae3-5719-b0b1-5926887be938",
+      "transliteration": "nOmOgen jaidang",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-491150af-c53b-5627-988a-8ccb722d1e22",
+      "transliteration": "nUken juuq_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-44962178-41a3-5df6-9ef8-89b19719fc66",
+      "transliteration": "oi uqaGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-00f2fd81-532b-5de9-b358-9663620fa373",
+      "transliteration": "ongGorqai congGorqai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e6f878ba-7e4f-54c0-850c-297525ac44e5",
+      "transliteration": "obol dobol",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-483af439-919a-5927-8e95-c7abfe6339e9",
+      "transliteration": "obos dobos",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-87a045f7-9cb1-522a-ba21-18aa71b47b5e",
+      "transliteration": "oblaju doblaqu",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-e5862c3d-87f4-5436-9f48-87df685e0cc4",
+      "transliteration": "obja Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b929c1cf-5ff3-5122-93e8-36c64330d4ef",
+      "transliteration": "objaG_a SobjaG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ece64e17-4d94-541c-b8a0-17d90d4d35c7",
+      "transliteration": "oGdoG toGdoG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-15daf599-918b-55e7-a352-84282c2435e2",
+      "transliteration": "oGdos toGdos",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f06f4260-fa1b-5404-8c70-6efce62650a1",
+      "transliteration": "omoG oroqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6d6ea806-3f70-5802-90fc-53a7e290dda3",
+      "transliteration": "oli Soli Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0e1ed8dc-7598-5156-b76a-ca6070b2716b",
+      "transliteration": "olbi orosiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-34fcbc59-3572-5881-9491-352a7d48009b",
+      "transliteration": "orom torom Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-49bf47c2-93c1-536b-9fe9-16f2c5d9355c",
+      "transliteration": "orodal jarudal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8ec6a661-c136-588b-8638-30dee617e229",
+      "transliteration": "oroja Garuja",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4e0136a4-a805-5143-8848-31fbeb89a21d",
+      "transliteration": "oi(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-015cef0b-0295-5392-8e13-deccff1d2ef9",
+      "transliteration": "oi(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-b7d3f4e7-3772-515b-b5c1-645f8e076de0",
+      "transliteration": "onobci(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-7206d9ad-a135-58eb-9d88-80a0d46b3045",
+      "transliteration": "onobci(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-9ee5f459-bac5-54da-a907-3ef2f36eddfa",
+      "transliteration": "oboG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-23052190-ad04-5473-9036-b777f38a9c48",
+      "transliteration": "oboG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-c12f98cd-e7fa-501f-8de6-5d931ffa0a94",
+      "transliteration": "oboG_a(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-ec32c7e7-7fea-5b39-af84-e8e077f6b94c",
+      "transliteration": "oro(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d715d1f7-8915-5c4d-8234-efb915973590",
+      "transliteration": "oro(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-4376fc5d-271a-59e5-986c-56f9568fd82d",
+      "transliteration": "oro(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-943555f9-7d44-5246-8474-b5b44c74cd4b",
+      "transliteration": "pUse(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-25ae0e9f-b48f-5350-83a5-87bb3ae1fd14",
+      "transliteration": "pUse(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-fb529d5f-51b3-5930-9c46-b4030506f84b",
+      "transliteration": "pis pis",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-bc62bcc2-d4b5-508a-936b-eb2ac134fd95",
+      "transliteration": "qasilG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d51abf88-b108-5cfe-8c7c-9195a4543c8d",
+      "transliteration": "qasilG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-863d9bcc-7ef0-52ff-9086-6365de13203b",
+      "transliteration": "qolboG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-c02d389a-a605-55ae-8445-4bcc1d07299c",
+      "transliteration": "qolboG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-14af5cda-ff68-5ba0-901a-0b4e980d6fd7",
+      "transliteration": "qori(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-21a37944-af0c-54fa-8c47-ea1b35bf6594",
+      "transliteration": "qori(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-7d82f49a-8696-531e-8e81-e9b8c26838ac",
+      "transliteration": "qoro(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-54c343ae-5dfc-5cb2-93b5-6197f8126a63",
+      "transliteration": "qoro(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-89db8451-bfe5-5f90-8fd6-95c22060feee",
+      "transliteration": "qaibang taibang",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-1f2518a4-45ff-5b95-bf94-8b24457a153c",
+      "transliteration": "qaibaG taibaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-d1d81518-a3ed-5f40-90d4-f8ed27e40f9c",
+      "transliteration": "qauli UjegUlkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bc865070-db19-5117-aa44-658a95b716f9",
+      "transliteration": "qanaju qadququ",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0f11e3ab-ffa2-5e18-be5f-a2d24aba2a89",
+      "transliteration": "qabaju kObOkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-64b0e80a-96c2-54c3-ac95-f6fd3326eff2",
+      "transliteration": "qabisun sara",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-eebf12e0-5d54-5774-87fc-277e91e95720",
+      "transliteration": "qabsurulcaju qamjilcaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3798e86e-d82d-585c-82b0-6d6831026849",
+      "transliteration": "qaGan qurmusta",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6b738784-9946-5871-91d9-fc7d8333197d",
+      "transliteration": "qaGaciju quGuciqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f53f177f-8ded-5153-82d1-b2b1364d8009",
+      "transliteration": "qaGda Uy_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-625b309f-d72e-5117-99fa-0a5d7c617710",
+      "transliteration": "qalaju joliqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-245ea456-c8a6-5e4f-87f5-59559572b8ea",
+      "transliteration": "qalasaju kOlcOkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ba03afae-a2a2-5acd-bbc2-e8e849d1fc1c",
+      "transliteration": "qalib dalib",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-57f00db8-0285-58a5-8fda-9dda484b1221",
+      "transliteration": "qaluriju daliraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cda26834-20bc-5bf5-b3a1-76a8335a5bca",
+      "transliteration": "qadquGur SUdkUgUr",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ca543137-671f-5298-b0be-aa05ba5caf04",
+      "transliteration": "qajaiju kUjeikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4a898568-805f-545a-adc8-0def375baa5f",
+      "transliteration": "qar_a bodoqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5eec9e7f-ce3a-50ad-8800-278e9ffef0f7",
+      "transliteration": "qar_a sanaG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ff2fb05f-824c-5351-9702-4450ebfcb100",
+      "transliteration": "qar_a sanaG_a ebUrlekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-817c4d01-6dc2-5fae-add8-db8d93181de7",
+      "transliteration": "qar_a dotor",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2caff47e-5167-54c0-a937-430ac2df377b",
+      "transliteration": "qar_a dotortai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-15d0cf3c-9086-5bba-866a-35116ecf3700",
+      "transliteration": "qariGu jolGalta",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-43b49649-c9af-5f4e-b278-e827d1009d51",
+      "transliteration": "qariyal irOgel",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8a14cccc-2d7c-52cd-ab49-362addb9453a",
+      "transliteration": "qoitu Uy_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4ae3435e-b78e-5a94-891f-fa32039753da",
+      "transliteration": "qonoG tUnUg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8d78490f-ce66-53fa-a570-8d281249e172",
+      "transliteration": "qob kelekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a12bd811-7858-5dc5-9341-a63f14af963c",
+      "transliteration": "qobsoraGan dobsoraGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8a5bfce3-6bc8-551a-9bf8-551ee58b265f",
+      "transliteration": "qobdoG kOdelkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7a96919a-d4e2-581d-be50-bcee6314bee5",
+      "transliteration": "qokiy_a qoGoson",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0e2cb0ca-1735-59f8-80ed-41d9f8c93bcf",
+      "transliteration": "qokiy_a dokiy_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f83fdc01-ee06-587d-a71a-d5b37be00eed",
+      "transliteration": "qoG tasu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c29bdea3-47c3-503f-a08b-1a564929f5a9",
+      "transliteration": "qolaci qaraca",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c2a4f484-2215-538f-9d45-0d0cc54e9bf4",
+      "transliteration": "qolim_a casu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-404bcefb-01a3-5ba7-99ff-8b1bb2b352d9",
+      "transliteration": "qota usu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0b813bb1-34b1-557f-af40-424346ec9c57",
+      "transliteration": "qoro yoro",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-76362357-1dc4-51ff-8392-d2f9d5a71e5d",
+      "transliteration": "qubcalaju dubcalaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0972b3bf-42ac-56f7-9b73-e2188e34a742",
+      "transliteration": "quGur-un kOg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5a7ad25f-8746-55d0-8467-40251d102b84",
+      "transliteration": "quGur-un car",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5b852404-2c11-5cf6-8ecc-d3d7a9408675",
+      "transliteration": "qudal qaGumaGai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c091e9aa-8416-5bf4-85ce-470b7874dd5d",
+      "transliteration": "qurdun tUrgen",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-11d3c161-1286-57d4-a500-f68f275d89a1",
+      "transliteration": "qurca qurdun",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3eb6eaac-e16b-57bd-98d3-6aa00eed4e4f",
+      "transliteration": "saisa(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-a140101b-66d3-5fe9-88d3-7318321cb574",
+      "transliteration": "saisa(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-8ae5199c-9fbe-5be4-a805-8e3214ca3341",
+      "transliteration": "saba(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-e2084870-b4e0-5c07-bf88-c930908d4a6e",
+      "transliteration": "saba(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-0dd10340-f527-5080-a959-e68346bf4132",
+      "transliteration": "saba(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-a31e6bad-fb14-5b8c-80c1-b320261be73f",
+      "transliteration": "sina(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-b7053db1-fc86-57b8-ab62-1bd135501e91",
+      "transliteration": "sina(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-5fdc4672-959c-5cb9-b8de-a9ce22ae012c",
+      "transliteration": "sina(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-2b3ebfc3-566c-51c3-92d0-313b6d852d82",
+      "transliteration": "sidU(n)",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-0658d35d-f00f-594d-b100-a5e73e0e21b9",
+      "transliteration": "solongG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-859e0d79-0390-5e27-987c-9a7edcb9281f",
+      "transliteration": "solongG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d7cfd09d-0bec-5cea-8cac-fc2d5570c0b1",
+      "transliteration": "sumu(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-a93c7e40-f947-5498-b54c-b92978bb75b5",
+      "transliteration": "sumu(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d294bb02-42db-5bfc-883b-e95a0ad259a7",
+      "transliteration": "sumu(n) /3",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-771ff82f-b6d7-5e9a-b919-92462d741d7e",
+      "transliteration": "sumu(n) /4",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-5dff3ffb-5d87-5d9e-a890-d9b7cc6fac9a",
+      "transliteration": "sumu(n) /5",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-f6bf54b6-7ab9-5581-a592-c490ad0e22ca",
+      "transliteration": "sanaGan taba-bar",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0a19151a-5e55-5b25-8ca6-5eacfb5cc54c",
+      "transliteration": "sanaG_a moqoqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-de067739-2270-53d3-9616-832f7f5cabfd",
+      "transliteration": "sanduruu mendUrUU",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-fb5ae4bf-0c57-594f-9026-a8cc5eaddcfd",
+      "transliteration": "sandurcu tebedekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cba6b7d2-4d64-522a-bdff-6aa70c515874",
+      "transliteration": "sabaG_a namaG_a Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-26dc089c-bdae-57d2-bfd1-ec538dc86cf2",
+      "transliteration": "saqal sanciG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1c1410bd-f445-588b-8f68-2f78a843c3fe",
+      "transliteration": "sambai qadaG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5d95d894-8e03-571b-8436-ddd6995b7635",
+      "transliteration": "salaG_a salburi",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0bd074a7-a6a2-53bc-814d-3d7492f74d2a",
+      "transliteration": "salbang im",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6142dad2-fec1-5a62-bad9-48e7bec77304",
+      "transliteration": "salburi jam",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cc625d9a-a49d-531c-831b-466925a0a27d",
+      "transliteration": "salkin-u GamsiG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d001e1b3-f029-53ab-8ac1-3a7237167c78",
+      "transliteration": "saridaG aGula",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d2835128-498d-5fde-a0c8-7ef8472b8507",
+      "transliteration": "segUl-Un mOr",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ed370509-455f-5b9d-b0fa-601aaf9f580d",
+      "transliteration": "segUl-Un segUl",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cfd32f80-c3a1-55a8-8107-080cbc7bfdc6",
+      "transliteration": "segsUrcU suGsurqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-50ad4f6f-0ef0-5d7e-ae79-8421709d8de5",
+      "transliteration": "selemen eber",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2cd313bf-47a4-5aca-b510-701c3686f65d",
+      "transliteration": "serejU medekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a5e574c0-b60c-583e-b53e-5cd6b9f28d90",
+      "transliteration": "serkeijU sarqaiqu",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-11a11721-d54d-50b3-9ea6-06aea357a6a5",
+      "transliteration": "serteijU sartaiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5b41a64f-1932-5419-8aa9-543436d14d85",
+      "transliteration": "serteljejU sartaljaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c0b4a263-df61-5409-a01d-69b569621252",
+      "transliteration": "sintaral Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-85dc7942-32a8-5405-914c-23a0d687bde4",
+      "transliteration": "sibaju siGaqu",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-b9883494-5483-5895-97fc-b23259e7fcfa",
+      "transliteration": "siber siber",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-55e30c53-27fd-5580-a57c-856e3b46b906",
+      "transliteration": "siber Sabir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8d2040ac-f67c-51f7-a069-cd15ee324917",
+      "transliteration": "siber Sobir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-27208265-1f5f-5129-ba3f-47087a63993f",
+      "transliteration": "siqaju Salaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8d1706e1-96e9-55ae-8b60-e4f968ad2ae8",
+      "transliteration": "sikir Satang",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-525d2ba7-5f8a-5984-818c-f5dfc4cb4484",
+      "transliteration": "siGaruG siGuruG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2c40caf9-7343-5b20-acfd-a83434a84d04",
+      "transliteration": "sigUjU baicaGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cd650138-564b-5d02-b1f2-53c7e059ef7b",
+      "transliteration": "sir Sar",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-b6379521-660e-54f0-a4a0-1056b4ad0a1d",
+      "transliteration": "sir_a miq_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-dab677a1-c976-597f-85c3-0bc6440cc899",
+      "transliteration": "sirege bOkO",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-62fc549b-2107-502c-ae53-4a5d22386630",
+      "transliteration": "sirqum_a Saldang",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-9b581e33-e618-554d-89f8-d85f0ced28ab",
+      "transliteration": "soniGun saiqan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cd4e24a0-97f6-5cae-bffa-e9c6a5d7a747",
+      "transliteration": "sundalaG_a ger",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b91df8c9-012e-54e1-8b08-4a94e96a978d",
+      "transliteration": "sungqan biljuuqai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c95ca8fe-9d97-5477-86e1-5654c9b118e8",
+      "transliteration": "suraG ajiG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ee09abb0-7c2c-55d3-9668-fbf5a24ff102",
+      "transliteration": "surGal surtal",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5e5ce0c7-82e6-5d2f-b877-934e7e23e6d3",
+      "transliteration": "sUbege sUberge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1a745579-fdc6-5106-82b5-9533c72d9c21",
+      "transliteration": "tatalG_a(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d9cb4f40-b9ee-5c09-aa6d-f21e39df1d80",
+      "transliteration": "tatalG_a(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-a1d0c6b9-f0a7-5ab6-a3b2-623cd266c446",
+      "transliteration": "toGoso(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-64135ea7-e2aa-5c99-b2ee-159ffdeed97b",
+      "transliteration": "toGoso(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-205c8979-82b0-5116-970b-96eaf5f02ef3",
+      "transliteration": "tOlOge(n)",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-ff7642bc-10a8-54c1-9d4c-46ff802fcf50",
+      "transliteration": "taiju tabiGlaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a79f5da8-825c-51d3-ae9a-2b2c1f99a57e",
+      "transliteration": "taG tig",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4e1d46e0-ba6f-5b03-8573-d949093e66f8",
+      "transliteration": "taGaju taGamaGlaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-925fbabd-c6e7-5f9c-bee4-ea55952b7ceb",
+      "transliteration": "tamaG_a temdeg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7cf834ff-ec80-5592-be4c-072356065147",
+      "transliteration": "tasuG nisuG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-212750e7-ef6e-5cef-a41a-f275aad6d8b8",
+      "transliteration": "tataG tataG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-dc4b6817-0d25-575b-816a-595cfd26be36",
+      "transliteration": "tataG yataG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9d2e2ad1-b7f6-5ee4-be3f-3f308d942e3a",
+      "transliteration": "tataGaljaju tUdegeljekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a5f54b13-d013-5e59-8be9-376a2a5ae61c",
+      "transliteration": "tatalGan bicikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-95951854-5cf5-5d15-b79e-cc6c00fe8922",
+      "transliteration": "taraiju tereikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7e69266d-182e-56d8-8ca1-7676635a0bdf",
+      "transliteration": "tarcigi turcigi",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-f00e67f5-79e1-5a4e-9159-93ee6245078f",
+      "transliteration": "tarcilaju mUrcilekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ef4721ff-afc5-5e11-95b9-cf7ea80035cf",
+      "transliteration": "tenteger tantaGar",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ec9eebdc-4ee3-5eb3-a30a-9a1f1571e68c",
+      "transliteration": "tentUr tUntUr",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-cf7fd52a-0ec7-5322-816d-60da573a6b42",
+      "transliteration": "tengkel tamir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6aa42d4f-8778-561e-a6d6-4086aa838664",
+      "transliteration": "temeUljU teleUlkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ad2bc24d-ba33-58a4-925b-08edf9d0ff29",
+      "transliteration": "temdeg bicig",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d1b605cb-8dcb-5e26-b592-f008b7c9c0fa",
+      "transliteration": "tes Oger_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-49875b40-257a-5ce9-aad4-6ffe2e3bfbae",
+      "transliteration": "tes buruGu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ef234549-54e2-5a13-8a56-566f34c4ed58",
+      "transliteration": "toin quwaraG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e3b5f472-4162-5f3a-9dfe-6676d94f9e90",
+      "transliteration": "tobqo kOldekU",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-d37fc2fd-9e01-5d20-bfb6-96a3a119bb25",
+      "transliteration": "tobqo kUrUkU",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-534caee6-f6f4-5c46-a262-6f2634e9c1e1",
+      "transliteration": "tobqo saGuqu",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-48166b24-f026-51e1-b67a-85875cb20336",
+      "transliteration": "toGomsar Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-145a5ea7-7f82-5628-9ec8-3a782bda7873",
+      "transliteration": "toGdoG toGtoG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-8f1fc12c-8533-5b60-af91-fd3a79b8e0f1",
+      "transliteration": "toGdos toGdus",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3083d711-758e-5435-be79-e5826a00b662",
+      "transliteration": "toGdor toGtor",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-aa7b997b-29d4-5a3f-9654-214399efbb7a",
+      "transliteration": "tomiyan-u uqaGan",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9b661677-850e-5f5d-955e-3efcb9584646",
+      "transliteration": "tosing gUyUkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b54fa782-4883-5696-abf4-3f4857d55248",
+      "transliteration": "toso Ugei sU'",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-743e0841-5b01-5ee7-a6c6-9f44acf4ddd5",
+      "transliteration": "toso talbiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-097a4e7a-4348-51d0-a138-aaf284a24dcc",
+      "transliteration": "torcu nurqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-15df4e79-de90-568b-8b71-c2f6dd2f181f",
+      "transliteration": "torcu tUlberekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-5626a2f0-ad60-541e-a06f-e315220750e4",
+      "transliteration": "torcu tUdekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d1b5acc5-96f8-5818-9cc5-35655102e321",
+      "transliteration": "tuituG taidaG",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-af5c3dc0-c844-5c0b-a335-4333cecf3be0",
+      "transliteration": "tulGan saGulGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-21a20a15-0553-514a-8647-091a8cd56d4d",
+      "transliteration": "tuSa dUngge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fc997108-fe46-58fd-b8fe-212de530de71",
+      "transliteration": "tuSaG_a modo",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e745f8ea-3c88-563d-934e-00a172875235",
+      "transliteration": "tOgerijU toGsiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b8fd3353-d9b2-5e7c-8b30-405910c955c1",
+      "transliteration": "tOsOblejU tOlOblekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7af34091-bb7a-51b9-a40f-4e01d843d072",
+      "transliteration": "tUg taG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-afaa1f9c-c6ea-5bd9-889e-fdaeba0d73e9",
+      "transliteration": "tUlkin uruGsilaGulqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9de3b6ff-3edf-5432-9805-408c31bc9339",
+      "transliteration": "tUsilge Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c537ead6-3134-5461-818c-2f5b0afe4cbd",
+      "transliteration": "tUsilge bolqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-31487032-0d0d-5c55-97a1-cf9445934897",
+      "transliteration": "tngri burjanggi kOdelkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-25b097c8-80cb-5245-ac8f-a3eb801e3f37",
+      "transliteration": "ulaGan utasun Gool",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-501b7667-98ef-59cb-b776-9bd10d8a1449",
+      "transliteration": "ulaGan qoGolai norGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bb950c9f-a50d-52d0-ac8b-c7ba56462339",
+      "transliteration": "urailaju quruilaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f8bbb4ff-a494-5820-8d06-9170cdc2ce99",
+      "transliteration": "urangqai sarangqai",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-70bbff45-52c3-569b-8135-40e57e641123",
+      "transliteration": "uri UjekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-23d7885f-8002-5f7a-971a-e00b6fb4271e",
+      "transliteration": "yaibaiju qaibaiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e9480d02-de3d-55a0-80b5-ff120191602b",
+      "transliteration": "yangtai Dangtai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-36aa25b4-b4bd-572d-95a2-030cfdc18bb3",
+      "transliteration": "yangtai cingtei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1008e544-2e51-5115-a306-ffb529b2d69e",
+      "transliteration": "yangju UjegUlkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b349f0d7-fa0c-5c01-8003-af6120a84229",
+      "transliteration": "yabuGan yabuGan-daGan",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-31c12171-e442-5279-a80b-79a39593fa2f",
+      "transliteration": "yabudal ucir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c9d02142-6fc6-50d9-b8aa-213fd139da14",
+      "transliteration": "yali Sali Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-a8b79803-3064-583c-800b-93ee639dad6c",
+      "transliteration": "yalim Salim Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-8d6f4283-6b5a-596a-8afe-32b21d56b25a",
+      "transliteration": "yaliy_a Saliy_a Ugei",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-7415440b-8eba-566c-b915-1c626f0b0cfc",
+      "transliteration": "yasu baraqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-04f06dbc-13bc-5f0b-bb27-3e7b36a36879",
+      "transliteration": "yasu bariyaci",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7c357791-87e2-5732-b9e9-719a86aadd09",
+      "transliteration": "yariju yangsiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ac220c5b-48cd-598c-8638-30be3e3d77a8",
+      "transliteration": "yarsiG yarbiG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-61bc8ed7-aa40-5618-b757-d3abeb32c027",
+      "transliteration": "yirtincU delekei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2c460c62-60cb-59da-ad63-1248c5c533f1",
+      "transliteration": "yirtincU-yin Gajar",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-249a6d9a-4956-52af-8376-964b4b2a234b",
+      "transliteration": "yOrgejU SOrgOkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0bcc0566-e885-5696-875c-e97d4d74e1e6",
+      "transliteration": "yElwi silbi",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-638e91a5-c252-5f1b-ba1e-9b2c15a180a9",
+      "transliteration": "Gai tui",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-c4b66f90-2037-5c28-a2bd-55477d6d97a9",
+      "transliteration": "Gang bolod",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-1a128d88-d3e7-5e84-8dff-ef3195309f37",
+      "transliteration": "Gaba caba",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-567f991f-459f-5899-9baf-2540fffd307b",
+      "transliteration": "Gal-un nOle",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-22c2be26-5c06-5a5f-bd51-36819fcab2a5",
+      "transliteration": "Gal-un sakiGulsu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-58735e41-030b-5cbb-a1c2-6a742a2edb30",
+      "transliteration": "Gal kOl",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d544c151-c705-5966-9026-700a2e9d6322",
+      "transliteration": "Gal kOsO",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-05000faf-cb92-5ddd-b40a-b9f565839eb3",
+      "transliteration": "Gal terge",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d1835a50-2d08-5dc8-9cb5-0199a930266a",
+      "transliteration": "GajiGu jOrigUU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-00ec5d92-a18c-5dab-b962-396a59b44376",
+      "transliteration": "Gar adququ",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-0c303376-b607-53d9-85f3-9c139466559b",
+      "transliteration": "Gar jaGur_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b21b2352-d635-5d45-8784-270988b4e91a",
+      "transliteration": "God suqai",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-ef72637c-8122-5358-9e2d-f8ca8d217d0a",
+      "transliteration": "Godoi God",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8ac9cb78-9220-5c6e-a687-866cdcae6a13",
+      "transliteration": "Godoju Sodoqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-984768e1-bdf8-5ef9-8b92-c52431eb5837",
+      "transliteration": "Guibing tuibang",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-aa1a5940-dafc-534f-8bf4-350617747537",
+      "transliteration": "Guniraju Guturaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b8a48568-0c35-5ee5-8167-dfdb858da02a",
+      "transliteration": "GubciGur modo",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-64979909-716f-5124-ac71-5e16957fa6fd",
+      "transliteration": "GuljiG GuljiG",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-cede94c5-40f2-5517-a042-892509be1aa6",
+      "transliteration": "O' qaraqu",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-db4d5aa9-05ff-58ff-8d40-b6ed62883400",
+      "transliteration": "O' seb",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-13eaba5d-0adf-5082-9e30-265094680c19",
+      "transliteration": "O' seb erikU",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-74e3f4a5-a77d-54b1-b911-0b3aa364e842",
+      "transliteration": "O' sO'",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-8f4dc2e4-e046-5372-94f2-04206a86f570",
+      "transliteration": "O' sOldesU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4717f16c-232d-5619-9760-7bbee6a93bd3",
+      "transliteration": "Onide mOngke",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e8c752eb-bc7e-516c-b5f9-a4e9b429de29",
+      "transliteration": "OngkOridejU dOngkOridekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-46dd42c0-bcd2-576e-b2ec-920a3f692a7f",
+      "transliteration": "Ober-iyen siidbUrilekU erke",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-efee762c-f115-56dc-9b34-ddb9a421a6ce",
+      "transliteration": "Oger_e cU Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4d323f88-fbde-5dc1-b67f-ded3a3343462",
+      "transliteration": "OggOge abuG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-4720adee-cfda-586f-a229-4b5e4fbc06c5",
+      "transliteration": "OggOlge abulG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-61314cf8-19d7-521c-af28-e953796a7c21",
+      "transliteration": "Oling sOling",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-2b4f6c85-0d10-5fbd-a9ae-d21baa91d04f",
+      "transliteration": "OlibeljejU sOlibeljekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-91f6c3f5-565f-529b-b4fd-e74f54b91e55",
+      "transliteration": "OlOn jobalG_a",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a2526e14-d10b-5168-9dff-c854d3347edd",
+      "transliteration": "OlOki bolki",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-6b108b8f-9747-5aa6-91af-513a720c9bd0",
+      "transliteration": "OlOki bUdUgUlig",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-b46a04e1-d3b7-5a8e-b88f-364ff8b828b0",
+      "transliteration": "OlmeU jOlmeU",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-388c30ff-3b83-55c0-a411-5c71656da455",
+      "transliteration": "Os abqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bad15b3b-9bcf-5f2e-8aaa-2be4f517072d",
+      "transliteration": "Os Osiy_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-70e9970d-f6ff-5788-a9e0-346cf111ea64",
+      "transliteration": "Os barilduqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9f82ffcf-99b1-59a2-89b7-4e5d10fba6c9",
+      "transliteration": "Os bodoqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3762bf07-be73-5430-9032-e4a613b08b39",
+      "transliteration": "Ocil OcikU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-516acdec-13bb-55d9-a0ba-cfd2a6c57379",
+      "transliteration": "OrOgesUn doGol",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c745797a-4f9b-524d-80f4-a0d75f1e6205",
+      "transliteration": "OrbOng sOrbOng",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-8537bdbc-cb83-51eb-8860-c79abda4e619",
+      "transliteration": "Ondege(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-d6c9c9f4-3967-5216-a30a-f89c092e8733",
+      "transliteration": "Ondege(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-3b4b7ac1-c410-5c0d-b9bd-189077bd2e5f",
+      "transliteration": "SaGantu(n)",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-10885f4e-f2f3-59d9-ba39-406b3fe9f9af",
+      "transliteration": "SaGardalG_a(n)",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-7c9701cb-a64b-5a97-bb4a-854827e500b1",
+      "transliteration": "Sama(n)",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-e03abe8a-67d4-51da-8cb2-e335ee6a6216",
+      "transliteration": "Sala(n) /1",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-cf0adc56-be15-5aa8-8ad7-11ce482a3902",
+      "transliteration": "Soro(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-481c1be8-79f6-5753-8878-c3f80433019d",
+      "transliteration": "Soro(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-b55d3623-a422-5cd0-9808-b2b491e93eb2",
+      "transliteration": "SOrge(n) /1",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-4f535ef9-6a47-59ba-9bf6-d8599d02d421",
+      "transliteration": "SOrge(n) /2",
+      "reason": "ambiguous_target"
+    },
+    {
+      "id": "entry-29c29e2a-0919-5615-b32d-9fa043807974",
+      "transliteration": "Saliqu Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d8a40ce2-b57b-5331-9a21-5a6f543cbf45",
+      "transliteration": "Saliy_a Ugei",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e6c4bcb8-ef97-5ed8-a1b2-ef1a5b0b90e1",
+      "transliteration": "Salcigi Salcigi",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-c966aab4-b4bb-5790-a88d-c105ea67faec",
+      "transliteration": "Sir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-fab6522c-d41a-504c-b34a-eb078f62bc9a",
+      "transliteration": "Sir Sar",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-41e4c4ca-a874-547e-a52a-59cd00377e64",
+      "transliteration": "Sir Sir",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-625f7714-69fc-5d6e-b3e0-aa964521afb3",
+      "transliteration": "Sod God",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3ad899ce-63dd-50b2-ac08-b304848a070e",
+      "transliteration": "UijU UkUkU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a4f71fda-e650-59b2-8d25-0084e424eb56",
+      "transliteration": "UiletU ner_e",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-bd8c0f57-fc8b-5428-8a7c-182122f876f3",
+      "transliteration": "Uitang lingqu_a ceceg",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-d2426ca6-af2d-5540-8fac-557229bc3a0c",
+      "transliteration": "UnerkejU tUnerkekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c8289123-3834-5312-9754-a5ffd0617e70",
+      "transliteration": "UnerkejU cenerkekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-f8ba236d-2573-53e4-aeb9-58a743c0f3f5",
+      "transliteration": "UndUsUn kiciyel",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-2f183377-9555-5c59-8da4-76fbf1624e1b",
+      "transliteration": "UkUsiretel_e barimtalaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-7d0828d9-e9f1-5cd4-865c-b3a871f33630",
+      "transliteration": "UsU jUsU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-948d5ef1-9a92-5b61-9924-bf868f79fced",
+      "transliteration": "UdejU qadaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-9c17af40-ce57-5489-ad5a-c51984876f5c",
+      "transliteration": "UdejU sitekU",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-3fe04e29-f82f-507a-aa5f-4507780a3fb7",
+      "transliteration": "UdejU tobkiqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-e13ca5ca-bba3-5e4a-90d0-f291fc1c131f",
+      "transliteration": "Uyes Uyes",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-a1514689-321a-5bbe-9134-bb5c768e229f",
+      "transliteration": "UyecijU nuGulqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-afe5cf4c-4036-523d-b6fe-a73a2e9c6efb",
+      "transliteration": "UyecijU salGaqu",
+      "reason": "additional_text"
+    },
+    {
+      "id": "entry-c2b0cf3b-6f8b-5732-85b5-04dc1ac29340",
+      "transliteration": "Uriy_e(n)",
+      "reason": "missing_target"
+    },
+    {
+      "id": "entry-9e7439de-48b2-5341-b7a6-96adf9f6b0fd",
+      "transliteration": "alcang calcang",
+      "reason": "cycle_or_unresolved_chain"
+    },
+    {
+      "id": "entry-7b29a1c4-5208-52d3-8124-07d0fb34a60a",
+      "transliteration": "naking nuking",
+      "reason": "cycle_or_unresolved_chain"
+    },
+    {
+      "id": "entry-1d865696-de7c-5290-8de7-674f5bbd5ce8",
+      "transliteration": "niGur julciljaqu",
+      "reason": "cycle_or_unresolved_chain"
+    },
+    {
+      "id": "entry-e128dcae-696e-58fa-b8ff-433226ef2d6b",
+      "transliteration": "orodal Gardal",
+      "reason": "cycle_or_unresolved_chain"
+    }
+  ]
+}

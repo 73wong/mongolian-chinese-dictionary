@@ -55,7 +55,7 @@ public class StudyChecks {
             Set<String> realIds=new HashSet<>();for(JSONObject e:entries)realIds.add(e.getString("id"));
             JSONObject fresh=new JSONObject().put("version",1).put("limit",7).put("pauseNew",false).put("cards",new JSONObject());study.restore(fresh,realIds);
             String id=entries.get(0).getString("id");study.add(Collections.singleton(id));study.rate(id,2,now,false);
-            ByteArrayOutputStream zip=new ByteArrayOutputStream();dictionary.export(zip,entries);
+            ByteArrayOutputStream zip=new ByteArrayOutputStream();dictionary.export(zip,Collections.singletonList(entries.get(0)));
             JSONObject backup=StudyStore.readBackup(new ByteArrayInputStream(zip.toByteArray()));
             check(backup.getJSONObject("cards").has(id)&&backup.getJSONArray("history").length()==1,"ZIP contains state and review history");
             study.restore(fresh,realIds);study.restore(backup,realIds);check(study.limit()==7&&study.contains(id),"restore settings and schedule");
