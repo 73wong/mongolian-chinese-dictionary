@@ -6,7 +6,7 @@
 
 ## 功能
 
-- **离线词库**：53,412 条词条，其中 25,911 条带离线语音。
+- **离线词库**：53,414 条词条，其中 25,911 条带离线语音。
 - **多种文字信息**：传统蒙古文竖排、罗马字母转写、国际音标和西里尔蒙古文，按来源数据提供。
 - **搜索**：前段一致、完全一致、后段一致和部分一致，可选转写模糊查询。
 - **学习**：收藏、学习计划、日历统计及相关短语分组。
@@ -61,7 +61,7 @@ APK 已内置完整词库和已有语音。普通用户只需下载安装 APK，
 
 ### 恢复离线数据
 
-从对应版本的 [Release](https://github.com/73wong/mongolian-chinese-dictionary/releases) 下载 `dictionary-data.zip`。
+从 [v1.1.0 数据包](https://github.com/73wong/mongolian-chinese-dictionary/releases/download/v1.1.0/dictionary-data.zip) 下载 `dictionary-data.zip`；v1.1.1 继续复用此原始数据包，词条补充与合并由源码中的修正规则应用。
 
 在项目根目录执行，并将示例路径替换为实际下载路径：
 
@@ -156,6 +156,14 @@ adb shell am instrument -w -e offlineOnly true org.example.mongoldictionary.test
 
 字体等第三方组件的现有许可与说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及对应资源目录中的许可文件。
 
+## 1.1.1 更新内容
+
+- 词典与学习页面复用，切换保留状态；设置移到右上角。
+- 词条反馈可预览并转到 GitHub Issues，支持中英文及本地草稿。
+- 学习卡片居中显示传统蒙古文，下方依次显示转写、音标、西里尔蒙古文与完整释义、例句。
+- 音标和西里尔蒙古文与拉丁转写字号一致；蒙古文括号词尾不再拆列。
+- 合并 Goriy_a(n) 重复项，保留带括号 n 的词条及语音，并迁移收藏和学习记录。
+
 ## 1.1.0 更新内容
 
 - 重做学习首页、学习卡片与本轮结束页。
@@ -173,8 +181,8 @@ adb shell am instrument -w -e offlineOnly true org.example.mongoldictionary.test
 
 ## 版本与签名
 
-当前版本：**`1.1.0-offline`**  
-Android versionCode：**`16`**
+当前版本：**`1.1.1-offline`**
+Android versionCode：**`17`**
 
 当前 APK 使用调试签名。长期发布前应配置并妥善保存正式签名密钥，后续覆盖升级需保持签名一致。
 

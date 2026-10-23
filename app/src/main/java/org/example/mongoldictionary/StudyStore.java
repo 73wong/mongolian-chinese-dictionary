@@ -18,6 +18,8 @@ public final class StudyStore {
         file=new AtomicFile(new File(context.getFilesDir(),"study-v1.json"));
         try(InputStream in=file.openRead()){data=parse(new String(DictionaryStore.read(in,10*1024*1024),StandardCharsets.UTF_8));}
         catch(FileNotFoundException e){data=new JSONObject().put("version",1).put("limit",5).put("pauseNew",false).put("cards",new JSONObject());}
+        JSONObject migrated=new JSONObject(data.toString());
+        if(EntryAliases.migrate(migrated))save(migrated);
     }
     static JSONObject parse(String json) throws Exception {
         JSONObject d=new JSONObject(json);
@@ -132,7 +134,7 @@ public final class StudyStore {
         return result;
     }
     public void restore(JSONObject backup,Set<String> available) throws Exception {
-        JSONObject valid=parse(backup.toString());JSONObject cs=valid.getJSONObject("cards");
+        JSONObject valid=parse(backup.toString());EntryAliases.migrate(valid);JSONObject cs=valid.getJSONObject("cards");
         for(Iterator<String> i=cs.keys();i.hasNext();)if(!available.contains(i.next()))throw new IOException("备份含当前词库没有的词条，请先导入对应词库");
         save(valid);
     }

@@ -20,11 +20,22 @@ public class StudyActivity extends Activity {
     private boolean revealed,hinted;
     private boolean calendarOpen;
     private boolean roundOpen;
+    private boolean loading;
+    private String dataStamp="",displayLanguage="",displayDay="";
+    private String stamp(){StringBuilder value=new StringBuilder();for(String name:new String[]{"study-v1.json","dictionary-v1.json"}){File file=new File(getFilesDir(),name);value.append(file.lastModified()).append(':').append(file.length()).append(';');}return value.toString();}
+    @Override protected void onResume(){super.onResume();if(study!=null&&!loading){
+        if(!stamp().equals(dataStamp)){Bundle state=new Bundle();state.putString("card",current);state.putBoolean("revealed",revealed);state.putBoolean("hinted",hinted);undo=null;load(state);}
+        else if(!displayLanguage.equals(UiText.language(this))||!displayDay.equals(java.time.LocalDate.now().toString())){if(current!=null)card();else dashboard();}
+    }}
     private String tr(String s){return UiText.get(this,s);}
     private java.time.YearMonth calendarMonth=java.time.YearMonth.now();
     private int dp(int n){return Math.round(n*getResources().getDisplayMetrics().density);}
     @Override public void onCreate(Bundle saved){super.onCreate(saved);
-        shell(tr("学习"));ProgressBar loading=new ProgressBar(this);body.addView(loading);
+        load(saved);
+    }
+    private void load(Bundle saved){
+        loading=true;
+        shell(tr("学习"));ProgressBar progress=new ProgressBar(this);body.addView(progress);
         new Thread(()->{
             try {
                 DictionaryStore loadedDictionary=new DictionaryStore(this);
@@ -33,7 +44,7 @@ public class StudyActivity extends Activity {
                 for(JSONObject row:loadedDictionary.load())loadedEntries.put(row.getString("id"),row);
                 runOnUiThread(()->{
                     if(isFinishing()||isDestroyed())return;
-                    dictionary=loadedDictionary;study=loadedStudy;entries.putAll(loadedEntries);
+                    dictionary=loadedDictionary;study=loadedStudy;entries.clear();entries.putAll(loadedEntries);loading=false;dataStamp=stamp();
                     if(saved!=null){current=saved.getString("card");revealed=saved.getBoolean("revealed");hinted=saved.getBoolean("hinted");}
                     if(current!=null&&entries.containsKey(current)&&study.contains(current)&&!study.paused(current)&&study.round(entries.keySet(),System.currentTimeMillis())!=null)card();else dashboard();
                 });
@@ -44,8 +55,8 @@ public class StudyActivity extends Activity {
         },"study-loader").start();
     }
 
-    private void shell(String title){stop();root=new LinearLayout(this);root.setOrientation(1);root.setPadding(dp(16),dp(12),dp(16),dp(8));root.setBackgroundColor(Color.rgb(248,247,242));setContentView(root);
-        TextView heading=new TextView(this);heading.setText(title);heading.setTextSize(25);heading.setTextColor(Color.rgb(25,57,53));root.addView(heading);
+    private void shell(String title){stop();displayLanguage=UiText.language(this);displayDay=java.time.LocalDate.now().toString();root=new LinearLayout(this);root.setOrientation(1);root.setPadding(dp(16),dp(12),dp(16),dp(8));root.setBackgroundColor(Color.rgb(248,247,242));setContentView(root);
+        LinearLayout top=new LinearLayout(this);top.setGravity(android.view.Gravity.CENTER_VERTICAL);root.addView(top);TextView heading=new TextView(this);heading.setText(title);heading.setTextSize(25);heading.setTextColor(Color.rgb(25,57,53));top.addView(heading,new LinearLayout.LayoutParams(0,-2,1));if(title.equals(tr("学习")))AppNavigation.settings(this,top,()->AppNavigation.open(this,MainActivity.class,"settings"));
         ScrollView scroll=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(1);scroll.addView(body);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
     }
     private TextView text(String value,int size){TextView t=new TextView(this);t.setText(DictionaryFont.apply(this,value));t.setTextIsSelectable(true);t.setTextSize(size);t.setTextColor(Color.rgb(25,57,53));t.setPadding(0,dp(8),0,dp(8));body.addView(t);return t;}
@@ -56,7 +67,7 @@ public class StudyActivity extends Activity {
     private boolean change(Change operation){try{operation.run();return true;}catch(Exception e){new AlertDialog.Builder(this).setTitle(UiText.get(StudyActivity.this,"未完成")).setMessage(e.getMessage()).setPositiveButton(UiText.get(StudyActivity.this,"知道了"),null).show();return false;}}
     private void vertical(String value,int size,int height){HorizontalScrollView s=new HorizontalScrollView(this);s.addView(new VerticalTextView(this,value,size,height));body.addView(s);}
     private Button link(LinearLayout parent,String title,Runnable action){Button b=control(parent,title,action,false);b.setBackgroundColor(Color.TRANSPARENT);b.setElevation(0);return b;}
-    private void studyNavigation(){LinearLayout bar=new LinearLayout(this);root.addView(bar);String[] titles={"词典","学习","设置"};for(int i=0;i<3;i++){final int tab=i;Button b=new Button(this);b.setText(tr(titles[i]));b.setAllCaps(false);b.setTextColor(0xff193d37);b.setBackgroundColor(Color.TRANSPARENT);b.setSelected(i==1);if(i==1)b.setTypeface(null,android.graphics.Typeface.BOLD);bar.addView(b,new LinearLayout.LayoutParams(0,dp(52),1));b.setOnClickListener(v->{if(tab==1)return;android.content.Intent intent=new android.content.Intent(this,MainActivity.class);intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP|android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);intent.putExtra("destination",tab==2?"settings":"dictionary");startActivity(intent);finish();});}}
+    private void studyNavigation(){AppNavigation.bar(this,root,1);}
     private void dashboard(){calendarOpen=false;roundOpen=false;current=null;revealed=false;hinted=false;shell(tr("学习"));long now=System.currentTimeMillis();int[] counts=study.counts(entries.keySet(),now);
         int fresh=study.pauseNew()?0:Math.min(counts[2],Math.max(0,study.limit()-study.introducedToday(now)));
         LinearLayout original=body;body=panel();
@@ -143,29 +154,29 @@ public class StudyActivity extends Activity {
     }
     private void card(){JSONObject row=entries.get(current);if(row==null){dashboard();return;}roundOpen=true;boolean fresh=study.fresh(current);shell(tr(fresh?"认识新词":"回忆含义"));JSONObject r=study.round(entries.keySet(),System.currentTimeMillis());
         button(tr("‹ 暂停，返回学习"),()->dashboard());if(r!=null){text((r.optInt("index")+1)+" / "+r.optJSONArray("ids").length(),14);ProgressBar progress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);progress.setMax(r.optJSONArray("ids").length());progress.setProgress(r.optInt("index"));body.addView(progress);}
-        boolean answer=revealed||fresh;text(tr(fresh?"先认识词形与含义，再开始练习":answer?"核对含义后，按实际回忆情况评分":"先回忆含义，再显示答案"),14);wordAudio=new WordAudioView(this,row.optString("mongolian"),38,answer?150:220,dictionary.audio(row),()->{if(!answer)hinted=true;});body.addView(wordAudio);
+        boolean answer=revealed||fresh;text(tr(fresh?"先认识词形与含义，再开始练习":answer?"核对含义后，按实际回忆情况评分":"先回忆含义，再显示答案"),14);wordAudio=new WordAudioView(this,row.optString("mongolian"),38,220,dictionary.audio(row),()->{if(!answer)hinted=true;});wordAudio.centerHeadword();body.addView(wordAudio,new LinearLayout.LayoutParams(-1,-2));
         wordAudio.setUndoSwipe(()->{if(undo!=null){undo();Toast.makeText(this,UiText.language(this).equals("en")?"Last rating undone":"已撤销上一次评分",Toast.LENGTH_SHORT).show();}});
         android.content.SharedPreferences gesturePrefs=getSharedPreferences("study-gestures",MODE_PRIVATE);
         if(!gesturePrefs.getBoolean("word-swipe-shown",false)){
             text(UiText.language(this).equals("en")?"Swipe right on the Mongolian headword to undo the last rating.":"在上方蒙古文词头区域右滑，撤销上一次评分。",13);
             gesturePrefs.edit().putBoolean("word-swipe-shown",true).apply();
         }
-        File audio=dictionary.audio(row);
-        if(answer){text(row.optString("transliteration"),23);if(row.has("definition_reference"))text((UiText.language(this).equals("en")?"Definition from: ":"释义参见：")+row.optString("definition_reference"),13);vertical(summary(row),22,170);
-            button(tr("展开完整释义与例句"),()->{HorizontalScrollView full=new HorizontalScrollView(this);full.addView(new VerticalTextView(this,ReferenceDefinitions.text(row),22,300));new AlertDialog.Builder(this).setTitle(row.optString("transliteration")).setView(full).setPositiveButton(tr("返回"),null).show();});
-            if(!row.optString("pronunciation").isEmpty())text(row.optString("pronunciation"),16);if(!row.optString("pronunciation_extra").isEmpty())text(row.optString("pronunciation_extra"),16);
+        if(answer){text(row.optString("transliteration"),23).setGravity(android.view.Gravity.CENTER);
+            if(!row.optString("pronunciation").isEmpty())text(row.optString("pronunciation"),23).setGravity(android.view.Gravity.CENTER);if(!row.optString("pronunciation_extra").isEmpty())text(row.optString("pronunciation_extra"),23).setGravity(android.view.Gravity.CENTER);
+            if(hinted)text(tr("已用提示：请选择忘记或费力想起"),13);
+            if(row.has("definition_reference"))text((UiText.language(this).equals("en")?"Definition from: ":"释义参见：")+row.optString("definition_reference"),13);
+            vertical(ReferenceDefinitions.text(row),22,300);
         }else{if(hinted)text(row.optString("transliteration"),22);else button(tr("查看转写提示"),()->{hinted=true;card();});}
 
         if(!answer){control(root,tr("显示答案"),()->{revealed=true;card();},true);return;}
         if(fresh){control(root,tr("已认识，稍后练习"),()->complete(0),true);return;}
-        if(hinted)text(tr("已用提示：请选择忘记或费力想起"),13);
         String[] names={"忘记了","费力想起","记得","很轻松"};for(int line=0;line<2;line++){LinearLayout pair=new LinearLayout(this);root.addView(pair);for(int j=0;j<2;j++){final int rating=line*2+j;String delay=rating==0?tr("1 分钟后"):study.interval(current,rating)+tr(" 天后");Button b=control(pair,tr(names[rating])+" · "+delay,()->complete(rating),rating==2);LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(0,-2,1);lp.setMargins(dp(3),dp(3),dp(3),dp(3));b.setLayoutParams(lp);b.setTextSize(14);b.setEnabled(!hinted||rating<2);}}
     }
     private void complete(int rating){String id=current;try{JSONObject before=study.snapshot();if(rating<0)study.defer(id,System.currentTimeMillis());else study.rate(id,rating,System.currentTimeMillis(),hinted);undo=before;undoId=id;next();}catch(Exception e){new AlertDialog.Builder(this).setMessage(e.getMessage()).setPositiveButton(tr("知道了"),null).show();}}
     private void undo(){if(undo==null)return;if(change(()->study.restore(undo,entries.keySet()))){current=undoId;undo=null;revealed=false;hinted=false;roundOpen=true;if(current!=null)card();else dashboard();}}
     private void play(File file){stop();player=new android.media.MediaPlayer();player.setOnPreparedListener(p->p.start());player.setOnCompletionListener(p->stop());player.setOnErrorListener((p,w,e)->{stop();Toast.makeText(this,UiText.get(StudyActivity.this,"语音无法播放"),Toast.LENGTH_LONG).show();return true;});try{player.setDataSource(file.getAbsolutePath());player.prepareAsync();}catch(Exception e){stop();Toast.makeText(this,UiText.get(StudyActivity.this,"语音无法读取"),Toast.LENGTH_LONG).show();}}
     private void stop(){if(wordAudio!=null)wordAudio.stop();if(player!=null){player.release();player=null;}}
-    @Override public void onBackPressed(){if(current!=null||calendarOpen||roundOpen)dashboard();else super.onBackPressed();}
-    @Override protected void onStop(){stop();super.onStop();}
+    @Override public void onBackPressed(){if(current!=null||calendarOpen||roundOpen)dashboard();else AppNavigation.open(this,MainActivity.class,"dictionary");}
+    @Override protected void onStop(){stop();if(!loading)dataStamp=stamp();super.onStop();}
     @Override protected void onSaveInstanceState(Bundle out){out.putString("card",current);out.putBoolean("revealed",revealed);out.putBoolean("hinted",hinted);super.onSaveInstanceState(out);}
 }

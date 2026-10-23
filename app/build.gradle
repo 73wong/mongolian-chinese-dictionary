@@ -7,8 +7,8 @@ android {
         testInstrumentationRunner "org.example.mongoldictionary.RenderingChecks"
         minSdk 26
         targetSdk 34
-        versionCode 16
-        versionName '1.1.0-offline'
+        versionCode 17
+        versionName '1.1.1-offline'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

@@ -19,11 +19,15 @@ public class RenderingChecks extends LocalImport {
     private boolean guideOnly;
     private boolean storageOnly;
     private boolean searchOnly;
-    @Override public void onCreate(Bundle arguments) { performanceOnly=arguments!=null&&"true".equals(arguments.getString("performanceOnly")); studyOnly=arguments!=null&&"true".equals(arguments.getString("studyOnly")); offlineOnly=arguments!=null&&"true".equals(arguments.getString("offlineOnly")); searchOnly=arguments!=null&&"true".equals(arguments.getString("searchOnly")); storageOnly=arguments!=null&&"true".equals(arguments.getString("storageOnly")); guideOnly=arguments!=null&&"true".equals(arguments.getString("guideOnly")); importMode=arguments!=null&&arguments.containsKey("token"); super.onCreate(arguments==null?new Bundle():arguments); }
+    private boolean navigationOnly;
+    @Override public void onCreate(Bundle arguments) { navigationOnly=arguments!=null&&"true".equals(arguments.getString("navigationOnly")); performanceOnly=arguments!=null&&"true".equals(arguments.getString("performanceOnly")); studyOnly=arguments!=null&&"true".equals(arguments.getString("studyOnly")); offlineOnly=arguments!=null&&"true".equals(arguments.getString("offlineOnly")); searchOnly=arguments!=null&&"true".equals(arguments.getString("searchOnly")); storageOnly=arguments!=null&&"true".equals(arguments.getString("storageOnly")); guideOnly=arguments!=null&&"true".equals(arguments.getString("guideOnly")); importMode=arguments!=null&&arguments.containsKey("token"); super.onCreate(arguments==null?new Bundle():arguments); }
     @Override public void onStart() {
         if(importMode){super.onStart();return;}
         Bundle result = new Bundle();
         try {
+            if(studyOnly)EntryAliasesChecks.run();
+            if(studyOnly){Throwable[] failure={null};runOnMainSync(()->{try{BracketLayoutChecks.run(getTargetContext());}catch(Throwable e){failure[0]=e;}});if(failure[0]!=null)throw new AssertionError(failure[0]);}
+            if(navigationOnly){result.putString("stream",NavigationChecks.run(this)+"\n");finish(Activity.RESULT_OK,result);return;}
             if(performanceOnly){result.putString("stream",PerformanceChecks.run(getTargetContext())+"\n");finish(Activity.RESULT_OK,result);return;}
             if(studyOnly){final Throwable[] gestureError={null};runOnMainSync(()->{try{SwipeUndoChecks.run(getTargetContext());}catch(Throwable e){gestureError[0]=e;}});if(gestureError[0]!=null)throw new AssertionError(gestureError[0]);StudyRoundChecks.run(getTargetContext());StudyChecks.run(getTargetContext());result.putString("stream","Study rounds, defer, undo, persistence and existing study checks passed.\n");finish(Activity.RESULT_OK,result);return;}
             if(offlineOnly){result.putString("stream",OfflineChecks.run(getTargetContext())+"\n");finish(Activity.RESULT_OK,result);return;}

@@ -20,6 +20,10 @@ final class WordAudioView extends HorizontalScrollView {
  private float downX,downY;
  private boolean tracking,dragging,copied;
  void setUndoSwipe(Runnable action){undoSwipe=action;}
+ void centerHeadword(){
+  setFillViewport(true);LinearLayout row=(LinearLayout)getChildAt(0);row.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
+  row.addView(new View(getContext()),0,new LinearLayout.LayoutParams(dp(68),1));
+ }
  @Override public boolean onInterceptTouchEvent(MotionEvent event){return undoSwipe==null&&super.onInterceptTouchEvent(event);}
  @Override public boolean dispatchTouchEvent(MotionEvent e){
   if(undoSwipe==null)return super.dispatchTouchEvent(e);

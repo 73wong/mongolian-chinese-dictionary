@@ -33,7 +33,17 @@ public class MainActivity extends Activity {
     private String[] modes(){return new String[]{UiText.get(MainActivity.this,"前段一致"),UiText.get(MainActivity.this,"完全一致"),UiText.get(MainActivity.this,"后段一致"),UiText.get(MainActivity.this,"部分一致")};}
     private Button action(String title,Runnable work){Button b=new Button(this);b.setText(title);b.setAllCaps(false);b.setTextColor(Color.rgb(25,57,53));android.graphics.drawable.GradientDrawable bg=new android.graphics.drawable.GradientDrawable();bg.setColor(Color.WHITE);bg.setCornerRadius(dp(12));bg.setStroke(dp(1),Color.rgb(215,225,220));b.setBackground(bg);LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(-1,dp(54));bp.setMargins(0,dp(5),0,dp(5));root.addView(b,bp);b.setOnClickListener(v->work.run());return b;}
     private void hideKeyboard(){if(root==null)return;((android.view.inputmethod.InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(root.getWindowToken(),0);}
-    private void navigation(){LinearLayout bar=new LinearLayout(this);root.addView(bar);String[] names={UiText.get(MainActivity.this,"词典"),UiText.get(MainActivity.this,"学习"),UiText.get(MainActivity.this,"设置")};for(int i=0;i<3;i++){final int tab=i;Button b=new Button(this);b.setText(names[i]);b.setAllCaps(false);b.setBackgroundColor(Color.TRANSPARENT);b.setTextColor(Color.rgb(25,57,53));bar.addView(b,new LinearLayout.LayoutParams(0,dp(52),1));b.setOnClickListener(v->{if(tab==0){searching=false;home();}else if(tab==1)startActivity(new android.content.Intent(this,StudyActivity.class));else settingsPage();});}}
+    private void navigation(){AppNavigation.bar(this,root,0);}
+    private LinearLayout beforeSettings;
+    private String beforeSettingsLanguage;
+    private boolean beforeSettingsDetails,settingsFromStudy;
+    private boolean loaded;
+    private void closeSettings(){
+        settingsOpen=false;getIntent().removeExtra("destination");
+        if(beforeSettings!=null&&UiText.language(this).equals(beforeSettingsLanguage)){root=beforeSettings;details=beforeSettingsDetails;setContentView(root);}else home();
+        beforeSettings=null;
+        if(settingsFromStudy){settingsFromStudy=false;AppNavigation.open(this,StudyActivity.class,null);}
+    }
 
     private final android.os.Handler searchHandler=new android.os.Handler(android.os.Looper.getMainLooper());
     private final java.util.concurrent.ExecutorService searchWorker=java.util.concurrent.Executors.newSingleThreadExecutor();
@@ -46,11 +56,13 @@ public class MainActivity extends Activity {
     private String legacyKey(JSONObject e) {
         return field(e,"mongolian") + "\u0001" + field(e,"transliteration") + "\u0001" + field(e,"source_page") + "\u0001" + e.optString("definition");
     }
-    @Override protected void onNewIntent(android.content.Intent intent){super.onNewIntent(intent);setIntent(intent);if("settings".equals(intent.getStringExtra("destination")))settingsPage();else{searching=false;home();}}
+    @Override protected void onNewIntent(android.content.Intent intent){super.onNewIntent(intent);setIntent(intent);if("settings".equals(intent.getStringExtra("destination"))){settingsFromStudy=true;if(loaded)settingsPage();}else if(settingsOpen){settingsFromStudy=false;closeSettings();}}
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
+        settingsFromStudy=state!=null?state.getBoolean("settingsFromStudy"):"settings".equals(getIntent().getStringExtra("destination"));
         prefs = getSharedPreferences("favorites", MODE_PRIVATE);
         favorites = new HashSet<>(prefs.getStringSet("entries", Collections.emptySet()));
+        if(favorites.remove(EntryAliases.OLD))favorites.add(EntryAliases.KEEP);
         if (state != null) { query=state.getString("query", ""); onlyFavorites=state.getBoolean("favorites"); }
         SharedPreferences options=getSharedPreferences("ui",MODE_PRIVATE);
         scope=options.getInt("scope",0);matchMode=options.getInt("match",0);ignoreCase=options.getBoolean("ignoreCase",false);fuzzy=options.getBoolean("fuzzyTransliteration",true);
@@ -63,7 +75,7 @@ public class MainActivity extends Activity {
             runOnUiThread(()->{
               if(isFinishing()||isDestroyed())return;
               try {
-            entries.addAll(loaded);
+            entries.addAll(loaded);MainActivity.this.loaded=true;
             try (InputStream migration=getAssets().open("favorite-migrations.json")) {
                 ByteArrayOutputStream migratedBytes=new ByteArrayOutputStream();
                 byte[] buf=new byte[4096]; int length;
@@ -99,6 +111,7 @@ public class MainActivity extends Activity {
     private void home() {
         stopAudio();details=false;settingsOpen=false;shell();
         if(!searching){
+            LinearLayout topBar=new LinearLayout(this);topBar.setGravity(android.view.Gravity.END);root.addView(topBar);AppNavigation.settings(this,topBar,()->{settingsFromStudy=false;settingsPage();});
             View top=new View(this);root.addView(top,new LinearLayout.LayoutParams(1,0,1));
             TextView title=label("Monggol Hitad Toli",32);title.setGravity(android.view.Gravity.CENTER);title.setTypeface(android.graphics.Typeface.createFromAsset(getAssets(),"fonts/LiberationSerif-Regular.ttf"));
             TextView subtitle=label(UiText.get(MainActivity.this,"蒙汉词典"),16);subtitle.setGravity(android.view.Gravity.CENTER);
@@ -170,7 +183,9 @@ public class MainActivity extends Activity {
     }
 
     private void settingsPage(){
-        stopAudio();details=false;settingsOpen=true;hideKeyboard();shell();label(UiText.get(MainActivity.this,"设置"),28);
+        if(!settingsOpen){beforeSettings=root;beforeSettingsLanguage=UiText.language(this);beforeSettingsDetails=details;}
+        stopAudio();details=false;settingsOpen=true;hideKeyboard();shell();
+        LinearLayout heading=new LinearLayout(this);heading.setGravity(android.view.Gravity.CENTER_VERTICAL);root.addView(heading);Button back=new Button(this);back.setText("‹");back.setContentDescription(UiText.get(this,"返回"));back.setBackgroundColor(Color.TRANSPARENT);heading.addView(back,new LinearLayout.LayoutParams(dp(48),dp(48)));back.setOnClickListener(v->closeSettings());TextView title=new TextView(this);title.setText(UiText.get(this,"设置"));title.setTextSize(25);title.setTextColor(0xff193d37);heading.addView(title);
         ScrollView scroll=new ScrollView(this);LinearLayout content=new LinearLayout(this);content.setOrientation(1);scroll.addView(content);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));LinearLayout container=root;root=content;
         label(UiText.get(MainActivity.this,"偏好"),16);action(UiText.get(MainActivity.this,"界面语言"),()->languagePicker());action(UiText.get(MainActivity.this,"学习设置"),()->learningSettings());
         action(UiText.get(this,"输入与转写指南"),()->openInputGuide());
@@ -188,7 +203,7 @@ public class MainActivity extends Activity {
             catch(android.content.ActivityNotFoundException e){ TextCopy.copy(this,sourceUrl); }
         });
         sourceLink.setOnLongClickListener(v->{TextCopy.copy(this,sourceUrl);return true;});
-        root=container;navigation();
+        root=container;
     }
     private void languagePicker(){String[] names={"跟随系统 / System","简体中文","English"};String selected=getSharedPreferences("ui",MODE_PRIVATE).getString("language","zh");int index=selected.equals("zh")?1:selected.equals("en")?2:0;
         new android.app.AlertDialog.Builder(this).setTitle(UiText.get(MainActivity.this,"界面语言")).setSingleChoiceItems(names,index,(d,w)->{getSharedPreferences("ui",MODE_PRIVATE).edit().putString("language",new String[]{"system","zh","en"}[w]).apply();d.dismiss();settingsPage();}).setNegativeButton(UiText.get(MainActivity.this,"取消"),null).show();
@@ -207,7 +222,8 @@ public class MainActivity extends Activity {
         root.addView(panel, new LinearLayout.LayoutParams(-1, -2));
     }
     private void detail(JSONObject e) {
-        details=true; shell(); Button back=new Button(this); back.setText(UiText.get(MainActivity.this,"‹ 返回搜索")); root.addView(back);back.setOnClickListener(v->home());
+        details=true; shell(); LinearLayout header=new LinearLayout(this);root.addView(header);Button back=new Button(this); back.setText(UiText.get(MainActivity.this,"‹ 返回搜索")); header.addView(back,new LinearLayout.LayoutParams(0,-2,1));back.setOnClickListener(v->home());
+        Button feedback=new Button(this);feedback.setText(UiText.language(this).equals("en")?"Feedback":"反馈");feedback.setAllCaps(false);header.addView(feedback,new LinearLayout.LayoutParams(-2,dp(48)));feedback.setOnClickListener(v->EntryFeedback.show(this,e));
         ScrollView scroll=new ScrollView(this); LinearLayout content=new LinearLayout(this);content.setOrientation(LinearLayout.VERTICAL);
         root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));scroll.addView(content);
         LinearLayout original=root;root=content;
@@ -224,7 +240,7 @@ public class MainActivity extends Activity {
                 final int countAdded=added;
                 new android.app.AlertDialog.Builder(this).setTitle(UiText.get(MainActivity.this,"连同相关短语加入学习"))
                     .setMessage(UiText.get(MainActivity.this,"本组共 ")+group.size()+UiText.get(MainActivity.this," 条，将新增 ")+countAdded+UiText.get(MainActivity.this," 条。已加入的词保留进度；每日按新词上限逐步学习。"))
-                    .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"加入整组"),(d,w)->{try{study.add(group);learn.setText(UiText.get(MainActivity.this,"已加入学习 · 查看任务"));Toast.makeText(this,UiText.get(MainActivity.this,"已加入整组"),Toast.LENGTH_SHORT).show();}catch(Exception error){Toast.makeText(this,error.getMessage(),Toast.LENGTH_LONG).show();}}).show();}else startActivity(new android.content.Intent(this,StudyActivity.class));}
+                    .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"加入整组"),(d,w)->{try{study.add(group);learn.setText(UiText.get(MainActivity.this,"已加入学习 · 查看任务"));Toast.makeText(this,UiText.get(MainActivity.this,"已加入整组"),Toast.LENGTH_SHORT).show();}catch(Exception error){Toast.makeText(this,error.getMessage(),Toast.LENGTH_LONG).show();}}).show();}else AppNavigation.open(this,StudyActivity.class,null);}
             catch(Exception error){Toast.makeText(this,UiText.get(MainActivity.this,"学习记录未能保存：")+error.getMessage(),Toast.LENGTH_LONG).show();}});
         label(UiText.get(MainActivity.this,"释义与例句 · 向左滑动查看更多"),17);
         if(e.has("definition_reference"))label((UiText.language(this).equals("en")?"Definition from: ":"释义参见：")+e.optString("definition_reference"),14);
@@ -291,6 +307,6 @@ public class MainActivity extends Activity {
     @Override protected void onDestroy(){searchGeneration++;searchHandler.removeCallbacksAndMessages(null);searchWorker.shutdownNow();super.onDestroy();}
     @Override protected void onStop(){stopAudio();super.onStop();}
     private void setStar(Button b,JSONObject e){b.setText(favorites.contains(key(e))?UiText.get(MainActivity.this,"★ 已收藏 · 点击取消"):UiText.get(MainActivity.this,"☆ 收藏词条"));}
-    @Override public void onBackPressed(){if(details)home();else if(searching||settingsOpen){hideKeyboard();searching=false;settingsOpen=false;home();}else super.onBackPressed();}
-    @Override public void onSaveInstanceState(Bundle out){out.putBoolean("searching",searching);out.putBoolean("settingsOpen",settingsOpen);out.putInt("resultPosition",resultPosition);out.putInt("resultTop",resultTop);out.putString("query",query);out.putBoolean("favorites",onlyFavorites);super.onSaveInstanceState(out);}
+    @Override public void onBackPressed(){if(settingsOpen)closeSettings();else if(details)home();else if(searching){hideKeyboard();searching=false;home();}else moveTaskToBack(true);}
+    @Override public void onSaveInstanceState(Bundle out){out.putBoolean("settingsFromStudy",settingsFromStudy);out.putBoolean("searching",searching);out.putBoolean("settingsOpen",settingsOpen);out.putInt("resultPosition",resultPosition);out.putInt("resultTop",resultTop);out.putString("query",query);out.putBoolean("favorites",onlyFavorites);super.onSaveInstanceState(out);}
 }

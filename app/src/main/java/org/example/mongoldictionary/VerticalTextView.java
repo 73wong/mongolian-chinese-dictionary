@@ -57,6 +57,7 @@ public final class VerticalTextView extends View {
         }
         contentHeight = heightDp * density;
         for (Piece piece : pieces) contentHeight = Math.max(contentHeight, piece.advance + 2 * inset);
+        for(int i=0;i<pieces.size();){int end=groupEnd(i);float height=0;for(int j=i;j<end;j++)height+=pieces.get(j).advance;contentHeight=Math.max(contentHeight,height+2*inset);i=end;}
         arrange();
         setOnLongClickListener(v->{TextCopy.copy(context,text);return true;});
         setContentDescription(text);
@@ -109,12 +110,28 @@ public final class VerticalTextView extends View {
         return result;
     }
 
+    private static boolean mongolian(String value){
+        boolean letter=false;for(int i=0;i<value.length();){int cp=value.codePointAt(i);if(cp>=0x1800&&cp<=0x18af)letter=true;else if(cp!=0x202f)return false;i+=Character.charCount(cp);}return letter;
+    }
+    // Optional Mongolian endings are inseparable from their brackets and headword.
+    private int groupEnd(int start){
+        int opening=start;
+        if(mongolian(pieces.get(start).text))opening++;
+        if(opening+2<pieces.size()){
+            String left=pieces.get(opening).text,right=pieces.get(opening+2).text;
+            if(((left.equals("(")&&right.equals(")"))||(left.equals("（")&&right.equals("）")))&&mongolian(pieces.get(opening+1).text))return opening+3;
+        }
+        return start+1;
+    }
     private void arrange() {
         float x = inset, y = inset, breadth = 0;
         List<Piece> column = new ArrayList<>();
-        for (Piece piece : pieces) {
+        int groupLimit=0;
+        for (int i=0;i<pieces.size();i++) {
+            Piece piece=pieces.get(i);boolean beginning=i>=groupLimit;float required=piece.advance;
+            if(beginning){groupLimit=groupEnd(i);required=0;for(int j=i;j<groupLimit;j++)required+=pieces.get(j).advance;}
             boolean newline = piece.text.equals("\n");
-            if (newline || (y > inset && y + piece.advance > contentHeight - inset)) {
+            if (newline || (beginning && y > inset && y + required > contentHeight - inset)) {
                 center(column, x, breadth);
                 x += Math.max(breadth, paint.getTextSize()) + gap;
                 y = inset;

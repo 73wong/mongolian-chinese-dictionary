@@ -49,6 +49,6 @@ final class ReferenceDefinitions {
     }
    }
   }
-
+  EntryAliases.apply(rows);
  }
 }
