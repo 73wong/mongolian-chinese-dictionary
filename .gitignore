@@ -27,3 +27,7 @@ key.properties
 signing.properties
 .env
 .env.*
+# Generated runtime database; rebuilt from restored offline data and audited overlays
+app/src/main/assets/dictionary.db
+app/src/main/assets/dictionary.db.tmp
+app/src/main/assets/dictionary-db-version.txt

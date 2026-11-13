@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 public class RenderingChecks extends LocalImport {
+    private boolean indexedOnly;
+    private boolean searchUiOnly;
     private boolean performanceOnly;
     private boolean offlineOnly;
     private boolean studyOnly;
@@ -20,11 +22,13 @@ public class RenderingChecks extends LocalImport {
     private boolean storageOnly;
     private boolean searchOnly;
     private boolean navigationOnly;
-    @Override public void onCreate(Bundle arguments) { navigationOnly=arguments!=null&&"true".equals(arguments.getString("navigationOnly")); performanceOnly=arguments!=null&&"true".equals(arguments.getString("performanceOnly")); studyOnly=arguments!=null&&"true".equals(arguments.getString("studyOnly")); offlineOnly=arguments!=null&&"true".equals(arguments.getString("offlineOnly")); searchOnly=arguments!=null&&"true".equals(arguments.getString("searchOnly")); storageOnly=arguments!=null&&"true".equals(arguments.getString("storageOnly")); guideOnly=arguments!=null&&"true".equals(arguments.getString("guideOnly")); importMode=arguments!=null&&arguments.containsKey("token"); super.onCreate(arguments==null?new Bundle():arguments); }
+    @Override public void onCreate(Bundle arguments) { indexedOnly=arguments!=null&&"true".equals(arguments.getString("indexedOnly")); searchUiOnly=arguments!=null&&"true".equals(arguments.getString("searchUiOnly")); navigationOnly=arguments!=null&&"true".equals(arguments.getString("navigationOnly")); performanceOnly=arguments!=null&&"true".equals(arguments.getString("performanceOnly")); studyOnly=arguments!=null&&"true".equals(arguments.getString("studyOnly")); offlineOnly=arguments!=null&&"true".equals(arguments.getString("offlineOnly")); searchOnly=arguments!=null&&"true".equals(arguments.getString("searchOnly")); storageOnly=arguments!=null&&"true".equals(arguments.getString("storageOnly")); guideOnly=arguments!=null&&"true".equals(arguments.getString("guideOnly")); importMode=arguments!=null&&arguments.containsKey("token"); super.onCreate(arguments==null?new Bundle():arguments); }
     @Override public void onStart() {
         if(importMode){super.onStart();return;}
         Bundle result = new Bundle();
         try {
+            if(indexedOnly){result.putString("stream",IndexedDictionaryChecks.run(getTargetContext())+"\n");finish(Activity.RESULT_OK,result);return;}
+            if(searchUiOnly){result.putString("stream",SearchUiChecks.run(this)+"\n");finish(Activity.RESULT_OK,result);return;}
             if(studyOnly)EntryAliasesChecks.run();
             if(studyOnly){Throwable[] failure={null};runOnMainSync(()->{try{BracketLayoutChecks.run(getTargetContext());}catch(Throwable e){failure[0]=e;}});if(failure[0]!=null)throw new AssertionError(failure[0]);}
             if(navigationOnly){result.putString("stream",NavigationChecks.run(this)+"\n");finish(Activity.RESULT_OK,result);return;}

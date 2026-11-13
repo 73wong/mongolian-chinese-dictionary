@@ -11,7 +11,7 @@ import java.util.*;
 public class StudyActivity extends Activity {
     private StudyStore study;
     private DictionaryStore dictionary;
-    private final LinkedHashMap<String,JSONObject> entries=new LinkedHashMap<>();
+    private Map<String,JSONObject> entries=new LinkedHashMap<>();
     private LinearLayout root,body;
     private android.media.MediaPlayer player;
     private WordAudioView wordAudio;
@@ -40,11 +40,13 @@ public class StudyActivity extends Activity {
             try {
                 DictionaryStore loadedDictionary=new DictionaryStore(this);
                 StudyStore loadedStudy=new StudyStore(this);
-                LinkedHashMap<String,JSONObject> loadedEntries=new LinkedHashMap<>();
-                for(JSONObject row:loadedDictionary.load())loadedEntries.put(row.getString("id"),row);
+                List<JSONObject> rows=loadedDictionary.load();
+                Map<String,JSONObject> loadedEntries;
+                if(rows instanceof IndexedDictionary)loadedEntries=((IndexedDictionary)rows).byId();
+                else {loadedEntries=new LinkedHashMap<>();for(JSONObject row:rows)loadedEntries.put(row.getString("id"),row);}
                 runOnUiThread(()->{
                     if(isFinishing()||isDestroyed())return;
-                    dictionary=loadedDictionary;study=loadedStudy;entries.clear();entries.putAll(loadedEntries);loading=false;dataStamp=stamp();
+                    dictionary=loadedDictionary;study=loadedStudy;entries=loadedEntries;loading=false;dataStamp=stamp();
                     if(saved!=null){current=saved.getString("card");revealed=saved.getBoolean("revealed");hinted=saved.getBoolean("hinted");}
                     if(current!=null&&entries.containsKey(current)&&study.contains(current)&&!study.paused(current)&&study.round(entries.keySet(),System.currentTimeMillis())!=null)card();else dashboard();
                 });
@@ -86,19 +88,32 @@ public class StudyActivity extends Activity {
         if(undo!=null)link(body,tr("撤销上一次评分"),()->undo());studyNavigation();
     }
     private void wordList(){calendarOpen=true;current=null;shell(tr("我的词表"));button(tr("‹ 返回今日任务"),()->dashboard());button(tr("随机选词 · 连同相关短语"),()->randomOptions());button(tr("手动选择词条（连同相关短语）"),()->choose());button(tr("学习词表 · 暂停 / 恢复"),()->manage());button(tr("学习设置"),()->settings());}
-    private void choose(){List<String> ids=new ArrayList<>(),labels=new ArrayList<>();for(JSONObject row:entries.values())if(!study.contains(row.optString("id"))){ids.add(row.optString("id"));labels.add(row.optString("transliteration")+" · "+summary(row));}
-        if(ids.isEmpty()){text(UiText.get(StudyActivity.this,"所有词条都已加入学习。"),16);return;}boolean[] selected=new boolean[ids.size()];
-        new AlertDialog.Builder(this).setTitle(UiText.get(StudyActivity.this,"选择要学习的词")) .setMultiChoiceItems(labels.toArray(new String[0]),selected,(d,w,b)->selected[w]=b)
-            .setNegativeButton(UiText.get(StudyActivity.this,"取消"),null).setPositiveButton(UiText.get(StudyActivity.this,"加入"),(d,w)->{List<String> chosen=new ArrayList<>();for(int i=0;i<ids.size();i++)if(selected[i])chosen.add(ids.get(i));confirmGroup(WordFamilies.expand(chosen,entries.values()),false,0);}).show();
+    private boolean selectionBusy;
+    private <T> void selectionWork(java.util.concurrent.Callable<T> work,java.util.function.Consumer<T> result){
+        if(selectionBusy)return;selectionBusy=true;LinearLayout screen=root;
+        ProgressBar progress=new ProgressBar(this);body.addView(progress);
+        new Thread(()->{try{T value=work.call();runOnUiThread(()->{selectionBusy=false;if(progress.getParent() instanceof android.view.ViewGroup)((android.view.ViewGroup)progress.getParent()).removeView(progress);if(!isFinishing()&&!isDestroyed()&&root==screen)result.accept(value);});}
+            catch(Exception e){runOnUiThread(()->{selectionBusy=false;if(progress.getParent() instanceof android.view.ViewGroup)((android.view.ViewGroup)progress.getParent()).removeView(progress);if(!isFinishing())Toast.makeText(this,tr("词库未能加载。请保留应用数据，检查存储空间后重试。"),Toast.LENGTH_LONG).show();});}},"study-selection").start();
+    }
+    private Set<String> enrolledIds(){Set<String> ids=new HashSet<>();for(String id:entries.keySet())if(study.contains(id))ids.add(id);return ids;}
+    private void choose(){
+        Set<String> enrolled=enrolledIds();Map<String,JSONObject> snapshot=entries;
+        selectionWork(()->{List<String> ids=new ArrayList<>(),labels=new ArrayList<>();for(JSONObject row:snapshot.values())if(!enrolled.contains(row.optString("id"))){ids.add(row.optString("id"));labels.add(row.optString("transliteration")+" · "+summary(row));}return Arrays.asList(ids,labels);},prepared->{
+            List<String> ids=prepared.get(0),labels=prepared.get(1);
+            if(ids.isEmpty()){text(tr("所有词条都已加入学习。"),16);return;}boolean[] selected=new boolean[ids.size()];
+            new AlertDialog.Builder(this).setTitle(tr("选择要学习的词")).setMultiChoiceItems(labels.toArray(new String[0]),selected,(d,w,b)->selected[w]=b)
+                .setNegativeButton(tr("取消"),null).setPositiveButton(tr("加入"),(d,w)->{List<String> chosen=new ArrayList<>();for(int i=0;i<ids.size();i++)if(selected[i])chosen.add(ids.get(i));selectionWork(()->WordFamilies.expand(chosen,snapshot.values()),expanded->confirmGroup(expanded,false,0));}).show();
+        });
     }
     private void randomOptions(){
         new AlertDialog.Builder(this).setTitle(UiText.get(StudyActivity.this,"随机抽取多少组？"))
             .setItems(new String[]{UiText.get(StudyActivity.this,"1 组"),UiText.get(StudyActivity.this,"3 组"),UiText.get(StudyActivity.this,"5 组")},(d,w)->randomGroup(new int[]{1,3,5}[w])).setNegativeButton(UiText.get(StudyActivity.this,"取消"),null).show();
     }
-    private void randomGroup(int count){Set<String> enrolled=new HashSet<>();for(String id:entries.keySet())if(study.contains(id))enrolled.add(id);
-        List<String> selected=WordFamilies.random(entries.values(),enrolled,count,new Random());
-        if(selected.isEmpty()){new AlertDialog.Builder(this).setMessage(UiText.get(StudyActivity.this,"所有词组都已加入学习。已暂停的词可在学习词表恢复。")).setPositiveButton(UiText.get(StudyActivity.this,"知道了"),null).show();return;}
-        confirmGroup(selected,true,count);
+    private void randomGroup(int count){Set<String> enrolled=enrolledIds();Map<String,JSONObject> snapshot=entries;
+        selectionWork(()->WordFamilies.random(snapshot.values(),enrolled,count,new Random()),selected->{
+            if(selected.isEmpty()){new AlertDialog.Builder(this).setMessage(tr("所有词组都已加入学习。已暂停的词可在学习词表恢复。")).setPositiveButton(tr("知道了"),null).show();return;}
+            confirmGroup(selected,true,count);
+        });
     }
     private void confirmGroup(List<String> ids,boolean random,int requested){
         if(ids.isEmpty())return;int added=0;StringBuilder preview=new StringBuilder();Set<String> families=new HashSet<>();
@@ -139,7 +154,7 @@ public class StudyActivity extends Activity {
         for(String id:entries.keySet())if(stats.words.contains(id))details.append("\n").append(entries.get(id).optString("transliteration"));
         new AlertDialog.Builder(this).setTitle(day).setMessage(details.toString()).setPositiveButton(UiText.get(StudyActivity.this,"返回"),null).show();
     }
-    private void manage(){List<String> ids=new ArrayList<>(),labels=new ArrayList<>();for(JSONObject row:entries.values())if(study.contains(row.optString("id"))){String id=row.optString("id");ids.add(id);labels.add((study.paused(id)?UiText.get(StudyActivity.this,"已暂停 · "):UiText.get(StudyActivity.this,"学习中 · "))+row.optString("transliteration"));}
+    private void manage(){List<String> ids=new ArrayList<>(),labels=new ArrayList<>();for(String id:entries.keySet())if(study.contains(id)){JSONObject row=entries.get(id);ids.add(id);labels.add((study.paused(id)?UiText.get(StudyActivity.this,"已暂停 · "):UiText.get(StudyActivity.this,"学习中 · "))+row.optString("transliteration"));}
         new AlertDialog.Builder(this).setTitle(UiText.get(StudyActivity.this,"点击暂停或恢复（保留进度）")).setItems(labels.toArray(new String[0]),(d,w)->{String id=ids.get(w);if(change(()->study.pause(id,!study.paused(id)))){undo=null;dashboard();}}).setNegativeButton(UiText.get(StudyActivity.this,"返回"),null).show();
     }
     private void settings(){LinearLayout box=new LinearLayout(this);box.setOrientation(1);box.setPadding(dp(20),0,dp(20),0);EditText number=new EditText(this);number.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);number.setText(String.valueOf(study.limit()));number.setHint(UiText.get(StudyActivity.this,"每日新词 1—50"));box.addView(number);CheckBox paused=new CheckBox(this);paused.setText(UiText.get(StudyActivity.this,"暂停学习新词"));paused.setChecked(study.pauseNew());box.addView(paused);

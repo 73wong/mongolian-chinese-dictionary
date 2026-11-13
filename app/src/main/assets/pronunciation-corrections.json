@@ -5,5 +5,82 @@
     "from": "tɑgnæː",
     "to": "taŋnai",
     "reason": "User-confirmed correction, 2026-10-18"
+  },
+  {
+    "id": "entry-02978ab9-6fa7-5e49-9cf8-b02ec9ff65fe",
+    "transliteration": "cengkeikU",
+    "from": "tʃiŋxiːx",
+    "to": "tʃəŋxiːx",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-3d93ada0-8f26-5b0b-9cec-9cb7a50a96dc",
+    "transliteration": "cengkeger",
+    "from": "tʃiŋxɡə̆r",
+    "to": "tʃəŋxɡə̆r",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-4d768d29-5872-59a1-937d-09ad0de8567a",
+    "transliteration": "cengker",
+    "from": "tʃiŋxə̆r",
+    "to": "tʃəŋxə̆r",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-22d095cd-23d5-5a71-b575-a21e2adaa0d7",
+    "transliteration": "cengkerken",
+    "from": "tʃiŋxə̆rxə̆n",
+    "to": "tʃəŋxə̆rxə̆n",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-2d350c9a-b016-55a4-8dc5-14eb2fd785e2",
+    "transliteration": "cengkerlekU",
+    "from": "tʃiŋxə̆rlə̆x",
+    "to": "tʃəŋxə̆rlə̆x",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-73663a83-ccea-5b5c-b22d-02c154373b8d",
+    "transliteration": "cengkertUkU",
+    "from": "tʃiŋxə̆rtə̆x",
+    "to": "tʃəŋxə̆rtə̆x",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-6b0e80ed-b724-5043-93c8-ed910633c165",
+    "transliteration": "cenggekU",
+    "from": "tʃiŋɡə̆x",
+    "to": "tʃəŋɡə̆x",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-cee02b19-f523-5939-b612-b668a1d4914d",
+    "transliteration": "cenggeg",
+    "from": "tʃiŋɡə̆ɡ",
+    "to": "tʃəŋɡə̆ɡ",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-b0f08c9d-ec35-52e8-929a-59791e61bc19",
+    "transliteration": "cenggel",
+    "from": "tʃiŋɡə̆l",
+    "to": "tʃəŋɡə̆l",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-6f3b9273-bdea-5c7c-9178-608251893dfd",
+    "transliteration": "cenggeltei",
+    "from": "tʃiŋɡə̆lteː",
+    "to": "tʃəŋɡə̆lteː",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
+  },
+  {
+    "id": "entry-3d09e143-3176-5d85-9d46-3aed4b945166",
+    "transliteration": "cenggeldUkU",
+    "from": "tʃiŋɡə̆ldə̆x",
+    "to": "tʃəŋɡə̆ldə̆x",
+    "reason": "User-confirmed initial vowel correction: i to schwa, 2026-11-13"
   }
 ]

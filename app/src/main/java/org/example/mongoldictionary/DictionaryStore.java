@@ -19,19 +19,13 @@ public final class DictionaryStore {
         ByteArrayOutputStream out=new ByteArrayOutputStream(); byte[] b=new byte[8192]; int n;
         while((n=in.read(b))!=-1) { if(out.size()+n>limit) throw new IOException("文件过大");out.write(b,0,n); } return out.toByteArray();
     }
-    private static String cachedKey;
-    private static List<JSONObject> cachedRows;
     public List<JSONObject> load() throws Exception {
-        synchronized(DictionaryStore.class){
-            File file=database.getBaseFile();
-            String key=file.getAbsolutePath()+":"+file.lastModified()+":"+file.length();
-            if(key.equals(cachedKey)&&cachedRows!=null)return new ArrayList<>(cachedRows);
-            long start=android.os.SystemClock.elapsedRealtime();
-            List<JSONObject> rows=loadUncached();
-            cachedKey=key;cachedRows=rows;
-            android.util.Log.i("DictionaryPerf","load_ms="+(android.os.SystemClock.elapsedRealtime()-start));
-            return new ArrayList<>(rows);
-        }
+        File source=database.getBaseFile();
+        if(new File(source.getPath()+".bak").exists()){try(InputStream ignored=database.openRead()){} }
+        long start=android.os.SystemClock.elapsedRealtime();
+        List<JSONObject> rows=source.exists()?IndexedDictionary.imported(context,source,()->loadUncached()):IndexedDictionary.open(context);
+        android.util.Log.i("DictionaryPerf","indexed_open_ms="+(android.os.SystemClock.elapsedRealtime()-start));
+        return rows;
     }
     private List<JSONObject> loadUncached() throws Exception {
         InputStream source;
@@ -153,6 +147,7 @@ public final class DictionaryStore {
         } catch(IOException e){if(out!=null)file.failWrite(out);return null;}
     }
     public void commit(Plan plan) throws Exception {
+        long previousModified=database.getBaseFile().lastModified();
         File dir=new File(context.getFilesDir(),"audio");if(!dir.isDirectory()&&!dir.mkdirs())throw new IOException("无法保存语音");
         for(Map.Entry<String,byte[]> item:plan.audio.entrySet()) {
             AtomicFile file=new AtomicFile(new File(dir,item.getKey()));FileOutputStream out=null;
@@ -165,7 +160,8 @@ public final class DictionaryStore {
             writer.write('[');boolean first=true;
             for(JSONObject row:plan.rows){if(!first)writer.write(',');writer.write(row.toString());first=false;}
             writer.write(']');writer.flush();database.finishWrite(out);
-            synchronized(DictionaryStore.class){cachedKey=null;cachedRows=null;}
+            database.getBaseFile().setLastModified(Math.max(System.currentTimeMillis(),previousModified+1));
+            IndexedDictionary.invalidateImported();
         }
         catch(Exception e){if(out!=null)database.failWrite(out);throw e;}
     }

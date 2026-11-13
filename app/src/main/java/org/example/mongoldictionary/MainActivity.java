@@ -14,7 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class MainActivity extends Activity {
-    private final List<JSONObject> entries = new ArrayList<>(), visible = new ArrayList<>();
+    private List<JSONObject> entries = new ArrayList<>();
+    private final List<JSONObject> visible = new ArrayList<>();
     private Set<String> favorites;
     private SharedPreferences prefs;
     private DictionaryStore store;
@@ -28,7 +29,7 @@ public class MainActivity extends Activity {
     private String query = "";
     private boolean searching=false,settingsOpen=false,ignoreCase=false,fuzzy=true;
     private int scope=0,matchMode=0,resultPosition=0,resultTop=0;
-    private Button filterButton;
+    private TextView filterTag;
     private String[] scopes(){return new String[]{UiText.get(MainActivity.this,"全部字段"),UiText.get(MainActivity.this,"传统蒙古文"),UiText.get(MainActivity.this,"转写字母"),UiText.get(MainActivity.this,"西里尔蒙古文"),UiText.get(MainActivity.this,"中文释义")};}
     private String[] modes(){return new String[]{UiText.get(MainActivity.this,"前段一致"),UiText.get(MainActivity.this,"完全一致"),UiText.get(MainActivity.this,"后段一致"),UiText.get(MainActivity.this,"部分一致")};}
     private Button action(String title,Runnable work){Button b=new Button(this);b.setText(title);b.setAllCaps(false);b.setTextColor(Color.rgb(25,57,53));android.graphics.drawable.GradientDrawable bg=new android.graphics.drawable.GradientDrawable();bg.setColor(Color.WHITE);bg.setCornerRadius(dp(12));bg.setStroke(dp(1),Color.rgb(215,225,220));b.setBackground(bg);LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(-1,dp(54));bp.setMargins(0,dp(5),0,dp(5));root.addView(b,bp);b.setOnClickListener(v->work.run());return b;}
@@ -38,6 +39,7 @@ public class MainActivity extends Activity {
     private String beforeSettingsLanguage;
     private boolean beforeSettingsDetails,settingsFromStudy;
     private boolean loaded;
+    private ImageButton startupMenu;
     private void closeSettings(){
         settingsOpen=false;getIntent().removeExtra("destination");
         if(beforeSettings!=null&&UiText.language(this).equals(beforeSettingsLanguage)){root=beforeSettings;details=beforeSettingsDetails;setContentView(root);}else home();
@@ -62,20 +64,18 @@ public class MainActivity extends Activity {
         settingsFromStudy=state!=null?state.getBoolean("settingsFromStudy"):"settings".equals(getIntent().getStringExtra("destination"));
         prefs = getSharedPreferences("favorites", MODE_PRIVATE);
         favorites = new HashSet<>(prefs.getStringSet("entries", Collections.emptySet()));
-        if(favorites.remove(EntryAliases.OLD))favorites.add(EntryAliases.KEEP);
+        EntryAliases.migrateFavorites(favorites);
         if (state != null) { query=state.getString("query", ""); onlyFavorites=state.getBoolean("favorites"); }
         SharedPreferences options=getSharedPreferences("ui",MODE_PRIVATE);
-        scope=options.getInt("scope",0);matchMode=options.getInt("match",0);ignoreCase=options.getBoolean("ignoreCase",false);fuzzy=options.getBoolean("fuzzyTransliteration",true);
+        scope=options.getInt("scope",0);matchMode=scope==0?3:options.getInt("match",0);ignoreCase=options.getBoolean("ignoreCase",false);fuzzy=options.getBoolean("fuzzyTransliteration",true);
         if(state!=null){searching=state.getBoolean("searching");settingsOpen=state.getBoolean("settingsOpen");resultPosition=state.getInt("resultPosition");resultTop=state.getInt("resultTop");}
         store=new DictionaryStore(this);
-        shell();label(UiText.get(this,"蒙汉词典"),28);root.addView(new ProgressBar(this));
+        final boolean restoreSettings=settingsOpen;
+        final Set<String> startupFavorites=new HashSet<>(favorites);
+        home();
         new Thread(()->{
           try {
             List<JSONObject> loaded=store.load();
-            runOnUiThread(()->{
-              if(isFinishing()||isDestroyed())return;
-              try {
-            entries.addAll(loaded);MainActivity.this.loaded=true;
             try (InputStream migration=getAssets().open("favorite-migrations.json")) {
                 ByteArrayOutputStream migratedBytes=new ByteArrayOutputStream();
                 byte[] buf=new byte[4096]; int length;
@@ -83,13 +83,19 @@ public class MainActivity extends Activity {
                 JSONObject mapping=new JSONObject(migratedBytes.toString("UTF-8"));
                 for(Iterator<String> keys=mapping.keys();keys.hasNext();) {
                     String previous=keys.next();
-                    if(favorites.remove(previous)) favorites.add(mapping.getString(previous));
+                    if(startupFavorites.remove(previous)) startupFavorites.add(mapping.getString(previous));
                 }
-                prefs.edit().putStringSet("entries",new HashSet<>(favorites)).apply();
+                prefs.edit().putStringSet("entries",new HashSet<>(startupFavorites)).apply();
             }
-            for(JSONObject entry:entries) if(favorites.remove(legacyKey(entry))) favorites.add(key(entry));
-            prefs.edit().putStringSet("entries",new HashSet<>(favorites)).apply();
-            if(settingsOpen||"settings".equals(getIntent().getStringExtra("destination")))settingsPage();else home();
+            boolean hasLegacyFavorites=false;for(String favorite:startupFavorites)if(favorite.indexOf('\u0001')>=0){hasLegacyFavorites=true;break;}
+            if(hasLegacyFavorites)for(JSONObject entry:loaded)if(startupFavorites.remove(legacyKey(entry)))startupFavorites.add(key(entry));
+            prefs.edit().putStringSet("entries",new HashSet<>(startupFavorites)).apply();
+            runOnUiThread(()->{
+              if(isFinishing()||isDestroyed())return;
+              try {
+                entries=loaded;favorites.clear();favorites.addAll(startupFavorites);MainActivity.this.loaded=true;
+                if(startupMenu!=null)startupMenu.setEnabled(true);
+                if(restoreSettings||"settings".equals(getIntent().getStringExtra("destination")))settingsPage();else refresh();
               }catch(Exception e){loadError();}
             });
           }catch(Exception e){runOnUiThread(()->loadError());}
@@ -110,22 +116,22 @@ public class MainActivity extends Activity {
     }
     private void home() {
         stopAudio();details=false;settingsOpen=false;shell();
-        if(!searching){
-            LinearLayout topBar=new LinearLayout(this);topBar.setGravity(android.view.Gravity.END);root.addView(topBar);AppNavigation.settings(this,topBar,()->{settingsFromStudy=false;settingsPage();});
-            View top=new View(this);root.addView(top,new LinearLayout.LayoutParams(1,0,1));
-            TextView title=label("Monggol Hitad Toli",32);title.setGravity(android.view.Gravity.CENTER);title.setTypeface(android.graphics.Typeface.createFromAsset(getAssets(),"fonts/LiberationSerif-Regular.ttf"));
-            TextView subtitle=label(UiText.get(MainActivity.this,"蒙汉词典"),16);subtitle.setGravity(android.view.Gravity.CENTER);
-            action(UiText.get(MainActivity.this,"搜索词典"),()->{searching=true;query="";resultPosition=0;home();search.requestFocus();search.post(()->((android.view.inputmethod.InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(search,android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT));});
-            TextView guide=label(UiText.get(this,"输入指南 ↗"),14);guide.setTextIsSelectable(false);guide.setGravity(android.view.Gravity.END);guide.setMinHeight(dp(48));guide.setOnClickListener(v->openInputGuide());
-            root.addView(new View(this),new LinearLayout.LayoutParams(1,0,1));navigation();return;
-        }
-        LinearLayout searchBar=new LinearLayout(this);root.addView(searchBar);
-        Button back=new Button(this);back.setText("‹");back.setContentDescription(UiText.get(MainActivity.this,"返回首页"));searchBar.addView(back,new LinearLayout.LayoutParams(dp(48),dp(52)));back.setOnClickListener(v->{hideKeyboard();searching=false;home();});
-        search=new EditText(this);search.setSingleLine(true);search.setTextSize(18);search.setHint(UiText.get(MainActivity.this,"搜索词典"));search.setText(query);search.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH);searchBar.addView(search,new LinearLayout.LayoutParams(0,dp(52),1));
-        Button clear=new Button(this);clear.setText("×");clear.setContentDescription(UiText.get(MainActivity.this,"清空搜索"));searchBar.addView(clear,new LinearLayout.LayoutParams(dp(48),dp(52)));clear.setOnClickListener(v->search.setText(""));
+        final LinearLayout landing=new LinearLayout(this);landing.setOrientation(1);root.addView(landing);
+        LinearLayout topBar=new LinearLayout(this);topBar.setGravity(android.view.Gravity.START);landing.addView(topBar);startupMenu=AppNavigation.settings(this,topBar,()->{settingsFromStudy=false;settingsPage();});startupMenu.setEnabled(loaded);
+        HomeWordmark wordmark=new HomeWordmark(this);LinearLayout.LayoutParams wordmarkLayout=new LinearLayout.LayoutParams(-1,dp(110));wordmarkLayout.topMargin=dp(Math.max(16,Math.min(40,getResources().getConfiguration().screenHeightDp/24)));landing.addView(wordmark,wordmarkLayout);
+        TextView title=new TextView(this);title.setText("Monggol Hitad Toli");title.setTextSize(30);title.setTextColor(0xff193d37);title.setGravity(android.view.Gravity.CENTER);title.setTypeface(android.graphics.Typeface.createFromAsset(getAssets(),"fonts/LiberationSerif-Regular.ttf"));title.setPadding(0,dp(12),0,dp(20));landing.addView(title);
+        landing.setVisibility(searching?View.GONE:View.VISIBLE);
+        LinearLayout searchBar=new LinearLayout(this);searchBar.setGravity(android.view.Gravity.CENTER_VERTICAL);searchBar.setBackground(searchSurface(0xffe8eee8,18));searchBar.setPadding(dp(12),0,dp(4),0);root.addView(searchBar);
+        Button back=new Button(this);back.setText("‹");back.setBackgroundColor(Color.TRANSPARENT);back.setContentDescription(UiText.get(this,"返回首页"));searchBar.addView(back,new LinearLayout.LayoutParams(dp(44),dp(52)));back.setVisibility(searching?View.VISIBLE:View.GONE);back.setOnClickListener(v->{hideKeyboard();searching=false;query="";home();});
+        ImageView searchIcon=new ImageView(this);searchIcon.setImageResource(R.drawable.ic_search);searchIcon.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);searchBar.addView(searchIcon,new LinearLayout.LayoutParams(dp(28),dp(48)));
+        search=new EditText(this);search.setSingleLine(true);search.setTextSize(18);search.setBackgroundColor(Color.TRANSPARENT);search.setContentDescription(UiText.get(this,"搜索词条"));search.setText(query);search.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH);searchBar.addView(search,new LinearLayout.LayoutParams(0,dp(52),1));
+        Button clear=new Button(this);clear.setText("×");clear.setBackgroundColor(Color.TRANSPARENT);clear.setContentDescription(UiText.get(this,"清空搜索"));searchBar.addView(clear,new LinearLayout.LayoutParams(dp(44),dp(52)));clear.setStateListAnimator(null);clear.setVisibility(query.isEmpty()?View.GONE:View.VISIBLE);clear.setOnClickListener(v->search.setText(""));
+        ImageButton filter=new ImageButton(this);filter.setImageResource(R.drawable.ic_settings_controls);filter.setBackgroundColor(Color.TRANSPARENT);filter.setContentDescription(UiText.get(this,"搜索筛选"));searchBar.addView(filter,new LinearLayout.LayoutParams(dp(48),dp(52)));filter.setOnClickListener(v->filters());
         LinearLayout tools=new LinearLayout(this);tools.setGravity(android.view.Gravity.CENTER_VERTICAL);root.addView(tools);
-        filterButton=new Button(this);filterButton.setTextSize(13);filterButton.setAllCaps(false);tools.addView(filterButton,new LinearLayout.LayoutParams(0,-2,1));filterButton.setOnClickListener(v->filters());
-        TextView help=new TextView(this);help.setText(UiText.get(this,"输入指南 ↗"));help.setTextSize(14);help.setTextColor(Color.rgb(25,57,53));help.setGravity(android.view.Gravity.CENTER);help.setMinHeight(dp(48));help.setPadding(dp(10),0,0,0);tools.addView(help);help.setOnClickListener(v->openInputGuide());
+        android.widget.FrameLayout tagTarget=new android.widget.FrameLayout(this);tools.addView(tagTarget,new LinearLayout.LayoutParams(-2,dp(44)));
+        filterTag=new TextView(this);filterTag.setTextSize(12);filterTag.setTextColor(0xff193d37);filterTag.setPadding(dp(9),dp(3),dp(9),dp(3));filterTag.setBackground(searchSurface(0xffe8eee8,8));android.widget.FrameLayout.LayoutParams tagLayout=new android.widget.FrameLayout.LayoutParams(-2,-2,android.view.Gravity.CENTER_VERTICAL);tagTarget.addView(filterTag,tagLayout);tagTarget.setContentDescription(UiText.get(this,"清除搜索范围筛选"));tagTarget.setOnClickListener(v->{scope=0;matchMode=3;saveSearchOptions();refresh();});
+        tools.addView(new View(this),new LinearLayout.LayoutParams(0,1,1));
+        TextView help=new TextView(this);help.setText(UiText.get(this,"输入指南"));help.setTextSize(14);help.setTextColor(0xff193d37);help.setGravity(android.view.Gravity.CENTER);help.setMinHeight(dp(48));tools.addView(help);help.setOnClickListener(v->openInputGuide());
         count=label("",14);list=new ListView(this);list.setDividerHeight(dp(1));root.addView(list,new LinearLayout.LayoutParams(-1,0,1));
         list.setOnItemClickListener((parent,view,position,id)->{resultPosition=list.getFirstVisiblePosition();resultTop=list.getChildAt(0)==null?0:list.getChildAt(0).getTop();hideKeyboard();detail(visible.get(position));});
         list.setOnItemLongClickListener((parent,view,position,id)->{
@@ -135,37 +141,36 @@ public class MainActivity extends Activity {
                     String value=w==0?field(e,"mongolian"):w==1?field(e,"transliteration"):w==2?field(e,"definition"):field(e,"mongolian")+"\n"+field(e,"transliteration")+"\n"+field(e,"definition");TextCopy.copy(this,value);
                 }).setNegativeButton(UiText.get(MainActivity.this,"取消"),null).show();return true;
         });
-        search.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int st,int c,int a){}public void afterTextChanged(Editable e){}public void onTextChanged(CharSequence s,int st,int before,int c){query=s.toString();resultPosition=0;resultTop=0;refresh();}});
+        LinearLayout bottom=new LinearLayout(this);bottom.setOrientation(1);root.addView(bottom);AppNavigation.bar(this,bottom,0);bottom.setVisibility(searching?View.GONE:View.VISIBLE);
+        search.setOnFocusChangeListener((v,focus)->{if(focus){searching=true;landing.setVisibility(View.GONE);bottom.setVisibility(View.GONE);back.setVisibility(View.VISIBLE);}});
+        root.setFocusableInTouchMode(true);if(!searching)root.requestFocus();
+        search.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int st,int c,int a){}public void afterTextChanged(Editable e){}public void onTextChanged(CharSequence s,int st,int before,int c){query=s.toString();clear.setVisibility(query.isEmpty()?View.GONE:View.VISIBLE);resultPosition=0;resultTop=0;refresh();}});
         search.setOnEditorActionListener((v,id,event)->{hideKeyboard();return true;});refresh();list.setSelectionFromTop(resultPosition,resultTop);
     }
     private void openInputGuide(){hideKeyboard();startActivity(new android.content.Intent(this,InputGuideActivity.class));}
-    private void filters(){
-        LinearLayout box=new LinearLayout(this);box.setOrientation(1);box.setPadding(dp(20),dp(8),dp(20),dp(8));
-        TextView fieldLabel=new TextView(this);fieldLabel.setText(UiText.get(MainActivity.this,"搜索范围"));box.addView(fieldLabel);
-        Spinner fields=new Spinner(this);fields.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,scopes()));fields.setSelection(scope);box.addView(fields);
-        TextView modeLabel=new TextView(this);modeLabel.setText(UiText.get(MainActivity.this,"匹配方式"));box.addView(modeLabel);
-        Spinner modesView=new Spinner(this);modesView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,modes()));modesView.setSelection(matchMode);box.addView(modesView);
-        CheckBox fuzzyBox=new CheckBox(this);fuzzyBox.setText(UiText.get(this,"转写模糊查询"));fuzzyBox.setChecked(fuzzy);box.addView(fuzzyBox);
-        CheckBox caseBox=new CheckBox(this);caseBox.setText(UiText.get(MainActivity.this,"不分大小写"));caseBox.setChecked(ignoreCase);box.addView(caseBox);
-        CheckBox stars=new CheckBox(this);stars.setText(UiText.get(MainActivity.this,"只看收藏"));stars.setChecked(onlyFavorites);box.addView(stars);
-        new android.app.AlertDialog.Builder(this).setTitle(UiText.get(MainActivity.this,"搜索条件")).setView(box).setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"应用"),(d,w)->{scope=fields.getSelectedItemPosition();matchMode=modesView.getSelectedItemPosition();ignoreCase=caseBox.isChecked();fuzzy=fuzzyBox.isChecked();onlyFavorites=stars.isChecked();getSharedPreferences("ui",MODE_PRIVATE).edit().putInt("scope",scope).putInt("match",matchMode).putBoolean("ignoreCase",ignoreCase).putBoolean("fuzzyTransliteration",fuzzy).apply();resultPosition=0;resultTop=0;refresh();}).show();
+    private android.graphics.drawable.GradientDrawable searchSurface(int color,int radius){android.graphics.drawable.GradientDrawable bg=new android.graphics.drawable.GradientDrawable();bg.setColor(color);bg.setCornerRadius(dp(radius));return bg;}
+    private void saveSearchOptions(){if(scope==0)matchMode=3;getSharedPreferences("ui",MODE_PRIVATE).edit().putInt("scope",scope).putInt("match",matchMode).putBoolean("ignoreCase",ignoreCase).putBoolean("fuzzyTransliteration",fuzzy).apply();resultPosition=0;resultTop=0;}
+    private android.app.Dialog filters(){
+        hideKeyboard();return SearchFilterSheet.show(this,scope,matchMode,fuzzy,ignoreCase,(field,mode,ambiguous,folded)->{scope=field;matchMode=mode;fuzzy=ambiguous;ignoreCase=folded;saveSearchOptions();refresh();});
     }
     private void refresh(){
         visible.clear();List<String> labels=new ArrayList<>();
-        filterButton.setText(scopes()[scope]+" · "+modes()[matchMode]+(fuzzy?UiText.get(this," · 转写模糊"):"")+(ignoreCase?UiText.get(MainActivity.this," · 不分大小写"):"")+(onlyFavorites?UiText.get(MainActivity.this," · 只看收藏"):""));
+        filterTag.setText((scope==0?"":scopes()[scope])+" ×");((View)filterTag.getParent()).setVisibility(scope==0?View.GONE:View.VISIBLE);
         final int generation=++searchGeneration;
         searchHandler.removeCallbacksAndMessages(null);
         final String requested=query;final int selectedScope=scope,selectedMode=matchMode;
         final boolean folded=ignoreCase,ambiguous=fuzzy,starsOnly=onlyFavorites;
         final Set<String> stars=new HashSet<>(favorites);
-        final List<JSONObject> snapshot=new ArrayList<>(entries);
+        final List<JSONObject> snapshot=entries;
         list.setAdapter(null);
-        count.setText(requested.trim().isEmpty()?UiText.get(this,"输入关键词开始搜索"):"…");
+        count.setText(requested.trim().isEmpty()?"":"…");
+        if(!loaded){count.setText(UiText.get(this,"正在准备离线词库…"));return;}
         if(requested.trim().isEmpty())return;
         searchHandler.postDelayed(()->searchWorker.execute(()->{
             long started=android.os.SystemClock.elapsedRealtime();
             List<JSONObject> matches=new ArrayList<>();
-            for(JSONObject e:snapshot){
+            List<JSONObject> candidates=snapshot instanceof IndexedDictionary?((IndexedDictionary)snapshot).search(requested,selectedScope,selectedMode,folded,ambiguous,stars,starsOnly,()->generation!=searchGeneration):snapshot;
+            for(JSONObject e:candidates){
                 if(generation!=searchGeneration||Thread.currentThread().isInterrupted())return;
                 if((!starsOnly||stars.contains(key(e)))&&SearchRules.matches(e,requested,selectedScope,selectedMode,folded,ambiguous)){
                     matches.add(e);labels.add((stars.contains(key(e))?"★ ":"")+field(e,"transliteration")+"\n"+field(e,"mongolian")+"\n"+field(e,"definition"));
@@ -191,7 +196,7 @@ public class MainActivity extends Activity {
         action(UiText.get(this,"输入与转写指南"),()->openInputGuide());
         label(UiText.get(MainActivity.this,"数据管理"),16);action(UiText.get(MainActivity.this,"导入 / 导出与备份"),()->packages());
         label(UiText.get(MainActivity.this,"词库信息"),16);label(UiText.get(MainActivity.this,"词条数量：")+entries.size(),18);TextView audioLabel=label(UiText.get(this,"本地语音：")+(audioCount<0?"…":audioCount),18);
-        if(audioCount<0){List<JSONObject> snapshot=new ArrayList<>(entries);new Thread(()->{int n=0;for(JSONObject e:snapshot)if(store.hasAudio(e))n++;final int total=n;runOnUiThread(()->{if(isFinishing()||isDestroyed())return;audioCount=total;audioLabel.setText(UiText.get(this,"本地语音：")+total);});},"audio-count").start();}
+        if(audioCount<0){List<JSONObject> snapshot=entries;new Thread(()->{int n=0;for(JSONObject e:snapshot)if(store.hasAudio(e))n++;final int total=n;runOnUiThread(()->{if(isFinishing()||isDestroyed())return;audioCount=total;audioLabel.setText(UiText.get(this,"本地语音：")+total);});},"audio-count").start();}
         label(UiText.get(this,"数据来源"),14);
         final String sourceUrl="http://hkuri.cneas.tohoku.ac.jp/p01/mongol/list?groupId=12";
         TextView sourceLink=label(sourceUrl,14);
@@ -236,12 +241,15 @@ public class MainActivity extends Activity {
         Button learn=new Button(this);root.addView(learn);
         try {StudyStore study=new StudyStore(this);learn.setText(study.contains(key(e))?UiText.get(MainActivity.this,"已加入学习 · 查看任务"):UiText.get(MainActivity.this,"＋ 加入学习"));}
         catch(Exception error){learn.setText(UiText.get(MainActivity.this,"查看学习记录"));}
-        learn.setOnClickListener(v->{try {StudyStore study=new StudyStore(this);if(WordFamilies.expand(Collections.singleton(key(e)),entries).stream().anyMatch(id->!study.contains(id))){List<String> group=WordFamilies.expand(Collections.singleton(key(e)),entries);int added=0;for(String id:group)if(!study.contains(id))added++;
-                final int countAdded=added;
+        learn.setOnClickListener(v->background(UiText.get(this,"正在准备词组…"),()->{
+            StudyStore study=new StudyStore(this);List<String> group=WordFamilies.expand(Collections.singleton(key(e)),entries);
+            int added=0;for(String id:group)if(!study.contains(id))added++;final int countAdded=added;
+            return ()->{if(countAdded>0){
                 new android.app.AlertDialog.Builder(this).setTitle(UiText.get(MainActivity.this,"连同相关短语加入学习"))
                     .setMessage(UiText.get(MainActivity.this,"本组共 ")+group.size()+UiText.get(MainActivity.this," 条，将新增 ")+countAdded+UiText.get(MainActivity.this," 条。已加入的词保留进度；每日按新词上限逐步学习。"))
-                    .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"加入整组"),(d,w)->{try{study.add(group);learn.setText(UiText.get(MainActivity.this,"已加入学习 · 查看任务"));Toast.makeText(this,UiText.get(MainActivity.this,"已加入整组"),Toast.LENGTH_SHORT).show();}catch(Exception error){Toast.makeText(this,error.getMessage(),Toast.LENGTH_LONG).show();}}).show();}else AppNavigation.open(this,StudyActivity.class,null);}
-            catch(Exception error){Toast.makeText(this,UiText.get(MainActivity.this,"学习记录未能保存：")+error.getMessage(),Toast.LENGTH_LONG).show();}});
+                    .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"加入整组"),(d,w)->{try{study.add(group);learn.setText(UiText.get(MainActivity.this,"已加入学习 · 查看任务"));Toast.makeText(this,UiText.get(MainActivity.this,"已加入整组"),Toast.LENGTH_SHORT).show();}catch(Exception error){Toast.makeText(this,error.getMessage(),Toast.LENGTH_LONG).show();}}).show();}else AppNavigation.open(this,StudyActivity.class,null);};
+        }));
+
         label(UiText.get(MainActivity.this,"释义与例句 · 向左滑动查看更多"),17);
         if(e.has("definition_reference"))label((UiText.language(this).equals("en")?"Definition from: ":"释义参见：")+e.optString("definition_reference"),14);
         vertical(field(e,"definition"),22,360);
@@ -291,7 +299,7 @@ public class MainActivity extends Activity {
             try(InputStream in=getContentResolver().openInputStream(uri)){if(in==null)throw new IOException(UiText.get(MainActivity.this,"无法读取文件"));plan=store.preview(in,entries);}
             return ()->new android.app.AlertDialog.Builder(this).setTitle(UiText.get(MainActivity.this,"确认导入变更")).setMessage(plan.summary())
               .setNegativeButton(UiText.get(MainActivity.this,"取消"),null).setPositiveButton(UiText.get(MainActivity.this,"导入"),(dialog,which)->background(UiText.get(MainActivity.this,"正在保存…"),()->{
-                  store.commit(plan);ReferenceDefinitions.apply(this,plan.rows);return ()->{audioCount=-1;entries.clear();entries.addAll(plan.rows);home();Toast.makeText(this,UiText.get(MainActivity.this,"导入完成"),Toast.LENGTH_LONG).show();};
+                  store.commit(plan);List<JSONObject> imported=store.load();return ()->{audioCount=-1;entries=imported;home();Toast.makeText(this,UiText.get(MainActivity.this,"导入完成"),Toast.LENGTH_LONG).show();};
               })).show();
         });
     }

@@ -3,6 +3,7 @@ import org.json.*;
 import java.util.*;
 final class EntryAliasesChecks {
  static void run()throws Exception{
+  checkMori();
   JSONObject old=new JSONObject().put("id",EntryAliases.OLD),keep=new JSONObject().put("id",EntryAliases.KEEP).put("mongolian","ᠭᠣᠷᠢᠶ᠎ᠠ(᠊ᠨ)").put("audio_file","original.mp3");
   List<JSONObject> rows=new ArrayList<>(Arrays.asList(old,keep));EntryAliases.apply(rows);EntryAliases.apply(rows);
   if(rows.size()!=1||rows.get(0)!=keep)throw new AssertionError("Wrong duplicate retained");
@@ -13,5 +14,14 @@ final class EntryAliasesChecks {
   JSONObject card=data.getJSONObject("cards").getJSONObject(EntryAliases.KEEP);
   if(card.getLong("last")!=200||card.getInt("seen")!=5||data.getJSONObject("cards").has(EntryAliases.OLD))throw new AssertionError("Progress lost");
   if(!EntryAliases.KEEP.equals(data.getJSONArray("history").getJSONObject(0).getString("id"))||data.getJSONObject("round").getJSONArray("ids").length()!=2||data.getJSONObject("round").getInt("index")!=1||data.getJSONObject("round").getJSONArray("results").length()!=1)throw new AssertionError("History or round migration failed");
+ }
+ static void checkMori()throws Exception{
+  JSONObject keep=new JSONObject().put("id",EntryAliases.MORI_KEEP).put("mongolian","ᠮᠣᠷᠢ(᠊ᠨ)").put("audio_file","mori.mp3");
+  List<JSONObject> rows=new ArrayList<>(Arrays.asList(new JSONObject().put("id",EntryAliases.MORI_OLD),keep));
+  EntryAliases.apply(rows);if(rows.size()!=1||rows.get(0)!=keep)throw new AssertionError("Mori canonical entry lost");
+  Set<String> favorites=new HashSet<>(Arrays.asList(EntryAliases.MORI_OLD));EntryAliases.migrateFavorites(favorites);
+  if(!favorites.contains(EntryAliases.MORI_KEEP)||favorites.size()!=1)throw new AssertionError("Mori favorite lost");
+  JSONObject data=new JSONObject().put("cards",new JSONObject().put(EntryAliases.MORI_OLD,new JSONObject().put("seen",3).put("last",100)));
+  if(!EntryAliases.migrate(data)||EntryAliases.migrate(data)||data.getJSONObject("cards").getJSONObject(EntryAliases.MORI_KEEP).getInt("seen")!=3)throw new AssertionError("Mori study migration failed");
  }
 }

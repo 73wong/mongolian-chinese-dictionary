@@ -27,3 +27,13 @@ tasks.register('verifyOfflineData') {
     }
 }
 tasks.named('preBuild').configure { dependsOn('verifyOfflineData') }
+
+// Compile audited corrections and indexes before packaging the offline database.
+tasks.register('buildDictionaryDatabase', Exec) {
+    workingDir rootProject.projectDir
+    commandLine 'python3', 'tools/build_dictionary_db.py'
+    inputs.file(rootProject.file('tools/build_dictionary_db.py'))
+    inputs.files(fileTree('src/main/assets') { include '*.json'; exclude 'ui-en.json', 'input-guide.json' })
+    outputs.files(file('src/main/assets/dictionary.db'), file('src/main/assets/dictionary-db-version.txt'))
+}
+tasks.named('preBuild').configure { dependsOn('buildDictionaryDatabase') }

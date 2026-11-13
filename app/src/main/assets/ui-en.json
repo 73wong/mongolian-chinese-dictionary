@@ -214,5 +214,19 @@
   "暂无待学任务": "All caught up",
   "学习记录": "Learning activity",
   "查看全部": "View all",
-  "每日完成词数 · 描边为今天": "Words completed each day · Today outlined"
+  "每日完成词数 · 描边为今天": "Words completed each day · Today outlined",
+  "搜蒙文、转写或中文": "Mongolian, Latin or Chinese",
+  "搜索筛选": "Search filters",
+  "清除搜索范围筛选": "Clear search scope",
+  "包含": "Contains",
+  "开头": "Starts with",
+  "精确": "Exact",
+  "结尾": "Ends with",
+  "更多选项": "More options",
+  "恢复默认": "Reset",
+  "关闭筛选": "Close filters",
+  "输入指南": "Input guide",
+  "搜索词条": "Search dictionary",
+  "正在准备离线词库…": "Preparing offline dictionary…",
+  "正在准备词组…": "Preparing word group…"
 }
