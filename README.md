@@ -12,7 +12,7 @@
 
 收藏和学习记录保存在设备中，不会通过 GitHub 自动同步。更新前可在 App 的数据管理中备份；覆盖安装需要保持应用签名一致。
 
-> 本文同时介绍当前 `main` 分支。源码中的最新改动尚未全部发布为 APK，下载安装包时请以对应 Release 的说明为准。
+> 本文介绍 1.1.2 的功能与构建方式。下载安装包时，请以对应 Release 的说明为准。
 
 ## 主要功能
 
@@ -27,7 +27,7 @@
 
 转写模糊查询仅合并 `o/u`、`O/U`、`t/d`、`k/g`，不合并 `a/e`。它与系统输入法的键位布局是不同概念。
 
-## 当前源码中的更新（尚未发布）
+## 1.1.2 更新内容
 
 - 简化搜索首页与筛选面板，加入居中的传统蒙古文标题和 `Monggol Hitad Toli`。
 - 使用预构建的 SQLite 索引，按需读取词条，减少启动及页面切换时整库解析的开销。
@@ -35,7 +35,7 @@
 - 合并重复的 `mori(n)` 词条，并迁移对应收藏与学习记录。
 - 修正 11 条以 `cengk`、`cengg` 开头的词条音标，将相应的 `tʃiŋ…` 改为 `tʃəŋ…`；缺失音标的词条未补造音标。
 
-源码中的版本字段目前仍为 `1.1.1-offline`（versionCode `17`），不代表以上改动已经包含在同名 Release 的安装包中。历史发布内容见 [Releases](https://github.com/73wong/mongolian-chinese-dictionary/releases)。
+版本字段为 `1.1.2-offline`（versionCode `18`）。历史发布内容见 [Releases](https://github.com/73wong/mongolian-chinese-dictionary/releases)。
 
 ## 词库与语音
 
@@ -157,7 +157,7 @@ adb shell am instrument -w -e indexedOnly true org.example.mongoldictionary.test
 
 Get `mongolian-chinese-dictionary.apk` from [Releases](https://github.com/73wong/mongolian-chinese-dictionary/releases). The APK includes dictionary data and available recordings; regular users do not need the data archive or crawler tools.
 
-The `main` branch contains improvements that are **not yet available in a published APK**. Refer to each Release for its included changes.
+This README describes version 1.1.2. Refer to each Release for its included changes.
 
 ### Features and data
 
